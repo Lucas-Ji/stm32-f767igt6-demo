@@ -1,0 +1,1308 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: ¦ÌVision V5.38.0.0
+Copyright (C) 2022 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: Lucas Jiang, Zephyr, LIC=----
+ 
+Tool Versions:
+Toolchain:       MDK-Lite  Version: 5.38.0.0
+Toolchain Path:  D:\APPInstalled\Keil\Keil_v5\ARM\ARMCLANG\Bin
+C Compiler:      ArmClang.exe V6.19
+Assembler:       Armasm.exe V6.19
+Linker/Locator:  ArmLink.exe V6.19
+Library Manager: ArmAr.exe V6.19
+Hex Converter:   FromElf.exe V6.19
+CPU DLL:         SARMCM3.DLL V5.38.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      Segger\JL2CM3.dll V2.99.42.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\EmbeddedWS\STM32F7\STM32CubeDefault_CAN\MDK-ARM\STM32CubeDefault.uvprojx
+Project File Date:  12/28/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V6.19', folder: 'D:\APPInstalled\Keil\Keil_v5\ARM\ARMCLANG\Bin'
+Build target 'STM32CubeDefault'
+../Source/BSW/CAN/CAN_DIAGCOM/src/LibDiagCom.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_DIAGCOM/inc\LibDiagCom.h(23): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_DIAGCOM/src/LibDiagCom.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_DIAGCOM/inc\LibDiagCom.h(23): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_DIAGCOM/src/LibDiagCom.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_DIAGCOM/inc\LibDiagCom.h(23): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_DIAGCOM/src/LibDiagCom.c(27): error: 'LibUds.h' file not found
+#include "LibUds.h"
+         ^~~~~~~~~~
+11 errors generated.
+compiling LibDiagCom.c...
+../Core/Src/freertos.c(28): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNm.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Core/Src/freertos.c(28): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNm.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+6 errors generated.
+compiling freertos.c...
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanCfg_FiltTbl.c(25): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanCfg_FiltTbl.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(17): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanCfg_FiltTbl.c(25): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanCfg_FiltTbl.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(17): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+8 errors generated.
+compiling LibCanCfg_FiltTbl.c...
+../Source/BSW/CAN/CAN_DIAGCOM/src/LibUdsAssist.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_DIAGCOM/inc\LibUdsAssist.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_DIAGCOM/src/LibUdsAssist.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_DIAGCOM/inc\LibUdsAssist.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_DIAGCOM/src/LibUdsAssist.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_DIAGCOM/inc\LibUdsAssist.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_DIAGCOM/src/LibUdsAssist.c(25): error: 'LibUds.h' file not found
+#include "LibUds.h"
+         ^~~~~~~~~~
+11 errors generated.
+compiling LibUdsAssist.c...
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanMsg.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(17): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanMsg.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(17): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(27): error: unknown type name 'E_LibCan_Channel_t'
+typedef E_LibCan_Channel_t  E_LibDrv_DevId_t;
+        ^
+5 errors generated.
+compiling LibCanMsg.c...
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanIlCbk.c(25): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanIlCbk.c(25): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanIlCbk.c(25): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibCanIlCbk.c...
+../Source/BSW/CAN/CAN_IL/src/LibCanIL.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_IL/src/LibCanIL.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_IL/src/LibCanIL.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_IL/src/LibCanIL.c(370): error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+                LibLog_Info("CAN:IL Service REINIT\n");
+                ^
+../Source/LIB/TYPE/inc\LibTypes.h(206): note: expanded from macro 'LibLog_Info'
+#define LibLog_Info       printf
+                          ^
+../Source/BSW/CAN/CAN_IL/src/LibCanIL.c(370): note: include the header <stdio.h> or explicitly provide a declaration for 'printf'
+../Source/LIB/TYPE/inc\LibTypes.h(206): note: expanded from macro 'LibLog_Info'
+#define LibLog_Info       printf
+                          ^
+../Source/BSW/CAN/CAN_IL/src/LibCanIL.c(693): warning: result of comparison of constant 1200 with expression of type 'uint8_t' (aka 'unsigned char') is always false [-Wtautological-constant-out-of-range-compare]
+                                if( Log_IL_count_temp>1200 )
+                                    ~~~~~~~~~~~~~~~~~^~~~~
+../Source/BSW/CAN/CAN_IL/src/LibCanIL.c(948): error: call to undeclared function 'TR_NOTIFY'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+                                                        TR_NOTIFY("s_c %d\r\n",singal_count);
+                                                        ^
+1 warning and 12 errors generated.
+compiling LibCanIL.c...
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanILCfg.c(24): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanILCfg.c(24): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/src/LibCanILCfg.c(24): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibCanILCfg.c...
+../Source/BSW/CAN/CAN_NM/src/CanNm.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNm.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_NM/src/CanNm.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNm.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_NM/src/CanNm.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNm.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_NM/src/CanNm.c(372): error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+        LibLog_Info("CanNm: Initialization");
+        ^
+../Source/LIB/TYPE/inc\LibTypes.h(206): note: expanded from macro 'LibLog_Info'
+#define LibLog_Info       printf
+                          ^
+../Source/BSW/CAN/CAN_NM/src/CanNm.c(372): note: include the header <stdio.h> or explicitly provide a declaration for 'printf'
+../Source/LIB/TYPE/inc\LibTypes.h(206): note: expanded from macro 'LibLog_Info'
+#define LibLog_Info       printf
+                          ^
+../Source/BSW/CAN/CAN_NM/src/CanNm.c(419): error: use of undeclared identifier 'LIBCANIL_SIG_GETHUTINFOSTS'
+            LibCanIL_SetSignal(LIBCANIL_SIG_GETHUTINFOSTS, 1);
+                               ^
+../Source/BSW/CAN/CAN_NM/src/CanNm.c(420): error: use of undeclared identifier 'LIBCANIL_MSG_AMP2'
+                    LibCanIL_SendEventMsgStart(LIBCANIL_MSG_AMP2);
+                                               ^
+../Source/BSW/CAN/CAN_NM/src/CanNm.c(766): warning: incompatible pointer types passing 'S_LibCan_Msg_t **' (aka 'struct (unnamed at ../Source/BSW/CAN/CAN_MESSAGE/inc/LibCanMsg.h:114:9) **') to parameter of type 'S_LibCan_Msg_t *' (aka 'struct (unnamed at ../Source/BSW/CAN/CAN_MESSAGE/inc/LibCanMsg.h:114:9) *'); remove & [-Wincompatible-pointer-types]
+    CanNmMsgs_BuildNmPDU(&msg);
+                         ^~~~
+../Source/BSW/CAN/CAN_NM/inc/CanNmMsgs.h(56): note: passing argument to parameter 'pduMsg' here
+void CanNmMsgs_BuildNmPDU(S_LibCan_Msg_t* pduMsg);
+                                          ^
+1 warning and 13 errors generated.
+compiling CanNm.c...
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(16): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(17): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(16): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(17): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(18): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(7): warning: In file included from...
+../Core/Inc\can.h(29): warning: In file included from...
+../Core/Inc/main.h(30): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal.h(29): warning: In file included from...
+../Core/Inc\stm32f7xx_hal_conf.h(271): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal_rcc.h(27): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h(29): warning: In file included from...
+../Drivers/CMSIS/Device/ST/STM32F7xx/Include\stm32f7xx.h(183): warning: 'SET_BIT' macro redefined [-Wmacro-redefined]
+#define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+        ^
+../Source/LIB/TYPE/inc\LibTypes.h(155): note: previous definition is here
+#define SET_BIT(x,y)                  ((x) = (x)|(0x1) << (y))
+        ^
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(18): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(7): warning: In file included from...
+../Core/Inc\can.h(29): warning: In file included from...
+../Core/Inc/main.h(30): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal.h(29): warning: In file included from...
+../Core/Inc\stm32f7xx_hal_conf.h(287): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal_cortex.h(49): error: expected member name or ';' after declaration specifiers
+  uint8_t                Enable;                /*!< Specifies the status of the region. 
+  ~~~~~~~                ^
+../Source/LIB/TYPE/inc\LibTypes.h(73): note: expanded from macro 'Enable'
+#define Enable                        (1)
+                                       ^
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(18): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(7): warning: In file included from...
+../Core/Inc\can.h(29): warning: In file included from...
+../Core/Inc/main.h(30): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal.h(29): warning: In file included from...
+../Core/Inc\stm32f7xx_hal_conf.h(287): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal_cortex.h(49): error: expected ')'
+../Source/LIB/TYPE/inc\LibTypes.h(73): note: expanded from macro 'Enable'
+#define Enable                        (1)
+                                       ^
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal_cortex.h(49): note: to match this '('
+../Source/LIB/TYPE/inc\LibTypes.h(73): note: expanded from macro 'Enable'
+#define Enable                        (1)
+                                      ^
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(95): error: use of undeclared identifier 'txHeader'
+                        txHeader.StdId = 0x123;
+                        ^
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(96): error: use of undeclared identifier 'txHeader'
+                        txHeader.IDE = CAN_ID_STD;
+                        ^
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(97): error: use of undeclared identifier 'txHeader'
+                        txHeader.RTR = CAN_RTR_DATA;
+                        ^
+../Source/BSW/CAN/CAN_IF/src/LibCanDrvMsg.c(98): error: use of undeclared identifier 'txHeader'
+                        txHeader.DLC = 8;
+                        ^
+1 warning and 14 errors generated.
+compiling LibCanDrvMsg.c...
+../Source/BSW/CAN/CAN_IF/src/CanIF.c(25): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(9): warning: In file included from...
+../Source/LIB/FIFO/inc\LibFifoQueue.h(20): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_IF/src/CanIF.c(25): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(9): warning: In file included from...
+../Source/LIB/FIFO/inc\LibFifoQueue.h(20): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_IF/src/CanIF.c(25): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(9): warning: In file included from...
+../Source/LIB/FIFO/inc\LibFifoQueue.h(20): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_IF/src/CanIF.c(254): error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+                                LibLog_Error("CANIF: Cannot store receive message\n");
+                                ^
+../Source/LIB/TYPE/inc\LibTypes.h(209): note: expanded from macro 'LibLog_Error'
+#define LibLog_Error      printf
+                          ^
+../Source/BSW/CAN/CAN_IF/src/CanIF.c(254): note: include the header <stdio.h> or explicitly provide a declaration for 'printf'
+../Source/LIB/TYPE/inc\LibTypes.h(209): note: expanded from macro 'LibLog_Error'
+#define LibLog_Error      printf
+                          ^
+../Source/BSW/CAN/CAN_IF/src/CanIF.c(269): error: expected ';' after do/while statement
+        }while(RxFrameNum != 0u)
+                                ^
+                                ;
+12 errors generated.
+compiling CanIF.c...
+../Source/BSW/CAN/CAN_NM/src/CanNmHistory.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmHistory.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_NM/src/CanNmHistory.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmHistory.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_NM/src/CanNmHistory.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmHistory.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling CanNmHistory.c...
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(9): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmMgr.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(9): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmMgr.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(9): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmMgr.h(11): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc/CanNmCfg.h(11): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(22): error: call to undeclared function 'LibSystem_WakeUpRequest'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    LibSystem_WakeUpRequest(LIBSYSTEM_REQFORRUN_CAN, CANNM_POWER_ON_WAKEUP_TIME);
+    ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(22): error: use of undeclared identifier 'LIBSYSTEM_REQFORRUN_CAN'
+    LibSystem_WakeUpRequest(LIBSYSTEM_REQFORRUN_CAN, CANNM_POWER_ON_WAKEUP_TIME);
+                            ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(40): error: call to undeclared function 'LibSystem_ShutdownRequest'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+    LibSystem_ShutdownRequest(LIBSYSTEM_REQFORRUN_CAN, 0U, LIBAPP_SHUTDOWN_REASON_SHUTDOWN);
+    ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(40): error: use of undeclared identifier 'LIBSYSTEM_REQFORRUN_CAN'
+    LibSystem_ShutdownRequest(LIBSYSTEM_REQFORRUN_CAN, 0U, LIBAPP_SHUTDOWN_REASON_SHUTDOWN);
+                              ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(40): error: use of undeclared identifier 'LIBAPP_SHUTDOWN_REASON_SHUTDOWN'
+    LibSystem_ShutdownRequest(LIBSYSTEM_REQFORRUN_CAN, 0U, LIBAPP_SHUTDOWN_REASON_SHUTDOWN);
+                                                           ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(47): error: conflicting types for 'LibSystem_WakeUpRequest'
+extern void LibSystem_WakeUpRequest(const uint32_t runTime_ms);
+            ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMgr.c(22): note: previous implicit declaration is here
+    LibSystem_WakeUpRequest(LIBSYSTEM_REQFORRUN_CAN, CANNM_POWER_ON_WAKEUP_TIME);
+    ^
+16 errors generated.
+compiling CanNmMgr.c...
+../Source/BSW/CAN/CAN_NM/src/CanNmMsgs.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmMsgs.h(13): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMsgs.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmMsgs.h(13): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMsgs.c(8): warning: In file included from...
+../Source/BSW/CAN/CAN_NM/inc\CanNmMsgs.h(13): warning: In file included from...
+../Source/BSW/CAN/CAN_IL/inc\LibCanIL.h(23): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMsgs.c(109): error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+                        LibLog_Info("LibCanNm: Remote Message\n");
+                        ^
+../Source/LIB/TYPE/inc\LibTypes.h(206): note: expanded from macro 'LibLog_Info'
+#define LibLog_Info       printf
+                          ^
+../Source/BSW/CAN/CAN_NM/src/CanNmMsgs.c(109): note: include the header <stdio.h> or explicitly provide a declaration for 'printf'
+../Source/LIB/TYPE/inc\LibTypes.h(206): note: expanded from macro 'LibLog_Info'
+#define LibLog_Info       printf
+                          ^
+11 errors generated.
+compiling CanNmMsgs.c...
+../Source/BSW/CAN/CAN_TASK/src/CanTask.c(21): warning: In file included from...
+../Source/BSW/CAN/CAN_TASK/inc\CanTask.h(21): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_TASK/src/CanTask.c(21): warning: In file included from...
+../Source/BSW/CAN/CAN_TASK/inc\CanTask.h(21): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_TASK/src/CanTask.c(21): warning: In file included from...
+../Source/BSW/CAN/CAN_TASK/inc\CanTask.h(21): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_TASK/src/CanTask.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(7): warning: In file included from...
+../Core/Inc\can.h(29): warning: In file included from...
+../Core/Inc/main.h(30): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal.h(29): warning: In file included from...
+../Core/Inc\stm32f7xx_hal_conf.h(271): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal_rcc.h(27): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc/stm32f7xx_hal_def.h(29): warning: In file included from...
+../Drivers/CMSIS/Device/ST/STM32F7xx/Include\stm32f7xx.h(183): warning: 'SET_BIT' macro redefined [-Wmacro-redefined]
+#define SET_BIT(REG, BIT)     ((REG) |= (BIT))
+        ^
+../Source/LIB/TYPE/inc\LibTypes.h(155): note: previous definition is here
+#define SET_BIT(x,y)                  ((x) = (x)|(0x1) << (y))
+        ^
+../Source/BSW/CAN/CAN_TASK/src/CanTask.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(7): warning: In file included from...
+../Core/Inc\can.h(29): warning: In file included from...
+../Core/Inc/main.h(30): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal.h(29): warning: In file included from...
+../Core/Inc\stm32f7xx_hal_conf.h(287): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal_cortex.h(49): error: expected member name or ';' after declaration specifiers
+  uint8_t                Enable;                /*!< Specifies the status of the region. 
+  ~~~~~~~                ^
+../Source/LIB/TYPE/inc\LibTypes.h(73): note: expanded from macro 'Enable'
+#define Enable                        (1)
+                                       ^
+../Source/BSW/CAN/CAN_TASK/src/CanTask.c(22): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\CanIF.h(7): warning: In file included from...
+../Core/Inc\can.h(29): warning: In file included from...
+../Core/Inc/main.h(30): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal.h(29): warning: In file included from...
+../Core/Inc\stm32f7xx_hal_conf.h(287): warning: In file included from...
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal_cortex.h(49): error: expected ')'
+../Source/LIB/TYPE/inc\LibTypes.h(73): note: expanded from macro 'Enable'
+#define Enable                        (1)
+                                       ^
+../Drivers/STM32F7xx_HAL_Driver/Inc\stm32f7xx_hal_cortex.h(49): note: to match this '('
+../Source/LIB/TYPE/inc\LibTypes.h(73): note: expanded from macro 'Enable'
+#define Enable                        (1)
+                                      ^
+../Source/BSW/CAN/CAN_TASK/src/CanTask.c(35): error: 'xcp_can.h' file not found
+#include "xcp_can.h"
+         ^~~~~~~~~~~
+1 warning and 13 errors generated.
+compiling CanTask.c...
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(21): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(17): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(21): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(17): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(27): error: unknown type name 'E_LibCan_Channel_t'
+typedef E_LibCan_Channel_t  E_LibDrv_DevId_t;
+        ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(213): error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+                LibLog_Warning("CAN:TP push not possible");
+                ^
+../Source/LIB/TYPE/inc\LibTypes.h(208): note: expanded from macro 'LibLog_Warning'
+#define LibLog_Warning    printf
+                          ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(213): note: include the header <stdio.h> or explicitly provide a declaration for 'printf'
+../Source/LIB/TYPE/inc\LibTypes.h(208): note: expanded from macro 'LibLog_Warning'
+#define LibLog_Warning    printf
+                          ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(399): warning: missing object format flag [-Wformat]
+                LibLog_Debug("CAN:TP TX %[]X", (uint8_t)pCanMsg->Length, pCanMsg->Data);
+                                          ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(453): warning: incompatible pointer types passing 'const S_LibCanTp_MsgIndBufferEntry_t **' (aka 'const S_LibCan_Msg_t **') to parameter of type 'const S_LibCan_Msg_t *'; remove & [-Wincompatible-pointer-types]
+        E_LibCanTp_FrameType_t messageType = LibCanTpInt_ParseFrameTypeRx(&pBufEntry);
+                                                                          ^~~~~~~~~~
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpInternal.h(286): note: passing argument to parameter 'pMsg' here
+extern E_LibCanTp_FrameType_t LibCanTpInt_ParseFrameTypeRx(const S_LibCan_Msg_t* pMsg);
+                                                                                 ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(459): error: no member named 'DevId' in 'S_LibCan_Msg_t'
+                if (pInst->DevId != pBufEntry->DevId)
+                                    ~~~~~~~~~  ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(476): warning: missing object format flag [-Wformat]
+                                LibLog_Debug("CAN:TP RX SF: %[]X", message_length, pInst->pCanMsg->Data);
+                                                              ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(482): warning: missing object format flag [-Wformat]
+                                LibLog_Debug("CAN:TP RX FF: %[]X", message_length, pInst->pCanMsg->Data);
+                                                              ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTp.c(488): warning: missing object format flag [-Wformat]
+                                LibLog_Debug("CAN:TP RX CF: %[]X", message_length, pInst->pCanMsg->Data);
+                                                              ^
+5 warnings and 7 errors generated.
+compiling LibCanTp.c...
+../Source/BSW/CAN/CAN_TP/src/LibCanTpCfg.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTpCfg.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTpCfg.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibCanTpCfg.c...
+../Source/BSW/CAN/CAN_TP/src/LibCanTpFsm.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpFsm.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTp.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTpFsm.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpFsm.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTp.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTpFsm.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpFsm.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTp.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibCanTpFsm.c...
+../Source/BSW/CAN/CAN_TP/src/LibCanTpInternal.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpInternal.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTp.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTpInternal.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpInternal.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTp.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTpInternal.c(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc\LibCanTpInternal.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTp.h(23): warning: In file included from...
+../Source/BSW/CAN/CAN_TP/inc/LibCanTpCfg.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTpInternal.c(122): error: call to undeclared library function 'printf' with type 'int (const char *, ...)'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+                        LibLog_Error("[TODO] CAN:TP Can not handle this addressing scheme");
+                        ^
+../Source/LIB/TYPE/inc\LibTypes.h(209): note: expanded from macro 'LibLog_Error'
+#define LibLog_Error      printf
+                          ^
+../Source/BSW/CAN/CAN_TP/src/LibCanTpInternal.c(122): note: include the header <stdio.h> or explicitly provide a declaration for 'printf'
+../Source/LIB/TYPE/inc\LibTypes.h(209): note: expanded from macro 'LibLog_Error'
+#define LibLog_Error      printf
+                          ^
+11 errors generated.
+compiling LibCanTpInternal.c...
+../Source/LIB/FIFO/src/LibFifoQueue.c(22): warning: In file included from...
+../Source/LIB/FIFO/inc\LibFifoQueue.h(20): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/LIB/FIFO/src/LibFifoQueue.c(22): warning: In file included from...
+../Source/LIB/FIFO/inc\LibFifoQueue.h(20): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/LIB/FIFO/src/LibFifoQueue.c(22): warning: In file included from...
+../Source/LIB/FIFO/inc\LibFifoQueue.h(20): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibFifoQueue.c...
+../Source/LIB/FSM/src/LibFsm.c(22): warning: In file included from...
+../Source/LIB/FSM/inc\LibFsm.h(23): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/LIB/FSM/src/LibFsm.c(22): warning: In file included from...
+../Source/LIB/FSM/inc\LibFsm.h(23): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/LIB/FSM/src/LibFsm.c(22): warning: In file included from...
+../Source/LIB/FSM/inc\LibFsm.h(23): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibFsm.c...
+../Source/LIB/SERVICE/src/LibService.c(19): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/LIB/SERVICE/src/LibService.c(19): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/LIB/SERVICE/src/LibService.c(19): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibService.h(28): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+../Source/LIB/SERVICE/src/LibService.c(67): error: call to undeclared function 'LibServiceHost_Notify'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+                LibServiceHost_Notify(pService->pServiceHost);
+                ^
+11 errors generated.
+compiling LibService.c...
+../Source/LIB/SERVICE/src/LibServiceHost.c(22): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibServiceHost.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/LIB/SERVICE/src/LibServiceHost.c(22): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibServiceHost.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/LIB/SERVICE/src/LibServiceHost.c(22): warning: In file included from...
+../Source/LIB/SERVICE/inc\LibServiceHost.h(22): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibServiceHost.c...
+../Source/LIB/TIMER/src/LibTimer.c(18): warning: In file included from...
+../Source/LIB/TIMER/inc\LibTimer.h(16): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/LIB/TIMER/src/LibTimer.c(18): warning: In file included from...
+../Source/LIB/TIMER/inc\LibTimer.h(16): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/LIB/TIMER/src/LibTimer.c(18): warning: In file included from...
+../Source/LIB/TIMER/inc\LibTimer.h(16): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibTimer.c...
+../Source/LIB/TYPE/src/LibTypes.c(15): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(21): warning: In file included from...
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(51): error: unknown type name 'bool_t'
+        const bool_t IsStdMsgId;
+              ^
+../Source/BSW/CAN/CAN_IF/inc\LibCanDrvMsg.h(79): error: unknown type name 'Ret_t'
+extern Ret_t LibMcan_IoCtl(void* pData, uint8_t command);
+       ^
+../Source/LIB/TYPE/src/LibTypes.c(15): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(20): warning: In file included from...
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(124): error: unknown type name 'bool_t'
+        bool_t IsExtId;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(129): error: unknown type name 'bool_t'
+        bool_t IsCanFd;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(134): error: unknown type name 'bool_t'
+        bool_t IsBrs;
+        ^
+../Source/BSW/CAN/CAN_MESSAGE/inc\LibCanMsg.h(139): error: unknown type name 'bool_t'
+        bool_t IsRemote;
+        ^
+../Source/LIB/TYPE/src/LibTypes.c(15): warning: In file included from...
+../Source/LIB/TYPE/inc\LibTypes.h(21): warning: In file included from...
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(179): error: use of undeclared identifier 'pdFALSE'
+                xReturn = pdFALSE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(183): error: use of undeclared identifier 'pdTRUE'
+                xReturn = pdTRUE;
+                          ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(203): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                             ^
+../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1\portmacro.h(222): error: use of undeclared identifier 'configMAX_SYSCALL_INTERRUPT_PRIORITY'
+                :"=r" (ulOriginalBASEPRI), "=r" (ulNewBASEPRI) : "i" ( configMAX_SYSCALL_INTERRUPT_PRIORITY ) : "memory"
+                                                                       ^
+10 errors generated.
+compiling LibTypes.c...
+".\STM32CubeDefault\STM32CubeDefault.axf" - 261 Error(s), 9 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM.CMSIS.5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F7xx_DFP.2.15.2.pack
+                Keil.STM32F7xx_DFP.2.15.2
+                STMicroelectronics STM32F7 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_STM32CubeDefault
+  D:/APPInstalled/Keil/Pack/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  D:/APPInstalled/Keil/Pack/Keil/STM32F7xx_DFP/2.15.2/Drivers/CMSIS/Device/ST/STM32F7xx/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.6.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Target not created.
+Build Time Elapsed:  00:00:04
+</pre>
+</body>
+</html>
