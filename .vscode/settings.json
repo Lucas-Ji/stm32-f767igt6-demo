@@ -1,0 +1,27 @@
+{
+    "files.associations": {
+        "Kconfig": "kconfig",
+        "stm32f7xx_hal.h": "c",
+        "stm32f7xx_hal_def.h": "c",
+        "stm32_hal_legacy.h": "c",
+        "stm32f7xx.h": "c",
+        "can.h": "c",
+        "libservice.h": "c",
+        "libtypes.h": "c",
+        "string.h": "c",
+        "cantask.h": "c",
+        "libcanil.h": "c",
+        "uartif.h": "c",
+        "cannmmsgs.h": "c",
+        "libcancfg_filttbl.h": "c",
+        "libdiagcom.h": "c",
+        "cannm.h": "c",
+        "stdbool.h": "c",
+        "gpio.h": "c",
+        "stdint.h": "c",
+        "deprecated_definitions.h": "c",
+        "stddef.h": "c",
+        "cmsis_os.h": "c",
+        "freertos.h": "c"
+    }
+}

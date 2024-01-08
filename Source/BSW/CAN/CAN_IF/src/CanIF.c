@@ -266,7 +266,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			break;
 		}
 
-	}while(RxFrameNum != 0u)
+	}while(RxFrameNum != 0u);
 	
 }
 

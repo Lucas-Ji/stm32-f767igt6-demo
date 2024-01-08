@@ -162,7 +162,7 @@ void CanNmMsgs_BuildNmPDU(S_LibCan_Msg_t* pduMsg)
     uint8_t nmDataTemp = 0;
 
     /* Byte0: Source node ID 	 									            */
-    nmDataTemp = (uint8_t)((pduMsg->Id)&0xFF);
+    nmDataTemp = (uint8_t)(CAN_NM_TX_NODE_ID & 0xFF);
     LibCanIL_SetSignal(LIBCANIL_NMSIG_COMMONTESTRX_NODEID, nmDataTemp);
 
     CanNmMsgs_WriteMessage(LIBCANIL_MSG_COMMONTESTTX_NM, pduMsg);
@@ -174,15 +174,7 @@ void CanNmMsgs_BuildNmPDU(S_LibCan_Msg_t* pduMsg)
 bool_t CanNmMsgs_IsRSRSet(const S_LibCan_Msg_t* const pduMsg)
 {
     Lib_Assert(pduMsg != NULL);
-
-    uint64_t msgData;
-    (void)memcpy(&msgData, pduMsg->Data, sizeof(msgData));
-
-    // extract signal value from the message data
-    const S_LibCanIL_SignalDesc_t* const pSignalDesc =
-            &LibCanILCfg_SignalTable.pSignalDesc[(uint8_t)LIBCANIL_NMSIG_COMMONTESTRX_CBV_REPEAT_MSG_REQ];
-    // get Receive NM Msg Control Bit Vector Bit0-RepeatMsgRequest 0-not requested 1-requested
     
-    const uint64_t sigValue = CanNmMsgs_ExtractSignal(msgData, pSignalDesc->MsgStartBit, pSignalDesc->Length);
-    return (bool_t)sigValue;
+    const bool_t sigValue = LibCanIL_GetSignal(LIBCANIL_NMSIG_COMMONTESTRX_CBV_REPEAT_MSG_REQ);
+    return sigValue;
 }

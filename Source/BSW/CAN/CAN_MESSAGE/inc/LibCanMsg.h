@@ -101,12 +101,7 @@ typedef enum
 	
 } E_LibCan_DlcSize_t;
 
-typedef enum
-{
-    CanChannel_1,
-    CanChannel_2,
-	CanChannel_All
-} E_LibCan_Channel_t;
+
 
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief CAN message structure.

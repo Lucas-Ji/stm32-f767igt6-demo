@@ -93,6 +93,12 @@ typedef struct
 	// ----------------------------------------------------------------------------------------------------------------
 	uint8_t SendTimes;
 
+	uint32_t SendInterval_ms;
+
+	uint32_t NextCallTime_ms;
+
+	void (*TxEventMsgFinishCallback)(void);
+
 	// ----------------------------------------------------------------------------------------------------------------
 	/// \brief Message name for the tx message.
 	// ----------------------------------------------------------------------------------------------------------------
@@ -429,7 +435,7 @@ extern bool_t LibCanIL_IsMsgIL(uint32_t msgId);
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief Start Send Event Message
 // --------------------------------------------------------------------------------------------------------------------
-extern void LibCanIL_SendEventMsgStart(E_LibCanILCfg_MessageNames_t msgName);
+extern void LibCanIL_SendEventMsgStart(E_LibCanILCfg_MessageNames_t msgName, uint32_t sendTimes, uint32_t sendInterval, void (*callback)(void));
 
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief Set Cycle Tx Message Enabled

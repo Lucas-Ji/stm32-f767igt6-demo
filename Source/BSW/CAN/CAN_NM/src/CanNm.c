@@ -16,9 +16,13 @@
 #define CANNM_SRV_EV_TRANSMIT_PDU_TIMEOUT               UINT32_C(0x00000004)
 #define CANNM_SRV_EV_NORMAL_TIMEOUT                     UINT32_C(0x00000008)
 #define CANNM_SRV_EV_PREPARE_SLEEP                      UINT32_C(0x00000010)
-#define CANNM_SRV_EV_GO_TO_SLEEP                        UINT32_C(0x00000020)
-#define CANNM_SRV_EV_REPEAT_MSG_TIMEOUT                 UINT32_C(0x00000040)
-#define CANNM_SRV_EV_TASK                               UINT32_C(0x00000080)
+#define CANNM_SRV_EV_PREPARE_SLEEP_TXFIFO_CLEAR         UINT32_C(0x00000020)
+#define CANNM_SRV_EV_GO_TO_SLEEP                        UINT32_C(0x00000040)
+#define CANNM_SRV_EV_GO_TO_SLEEP_TIMEOUT                UINT32_C(0x00000080)
+#define CANNM_SRV_EV_REPEAT_MSG_TIMEOUT                 UINT32_C(0x00000100)
+#define CANNM_SRV_EV_TASK                               UINT32_C(0x00000200)
+
+// ----------------------------------------------------------------
 
 
 // --------------------------------------------------------------------------------------------------------------------
@@ -47,10 +51,10 @@
 
 #define CANNM_STATE(DEFINE_STATE) \
     DEFINE_STATE(CANNM_STATE_POWER_OFF,      LibFsm_Empty,                  LibFsm_Empty,               LibFsm_Empty)          \
-    DEFINE_STATE(CANNM_STATE_SLEEP,          CanNm_SleepSrv,                CanNm_SleepEntry,           LibFsm_Empty)          \
+    DEFINE_STATE(CANNM_STATE_SLEEP,          CanNm_SleepSrv,                CanNm_SleepEntry,           CanNm_SleepExit)       \
     DEFINE_STATE(CANNM_STATE_REPEAT_MESSAGE, CanNm_RepeatMsgSrv,            CanNm_RepeatMsgEntry,       CanNm_RepeatMsgExit)   \
-    DEFINE_STATE(CANNM_STATE_NORMAL,         CanNm_ReadySleepAndNomalSrv,   CanNm_NormalEntry,          CanNm_NormalExit)      \
-    DEFINE_STATE(CANNM_STATE_READY_SLEEP,    CanNm_ReadySleepAndNomalSrv,   CanNm_ReadySleepEntry,      CanNm_ReadySleepExit)  \
+    DEFINE_STATE(CANNM_STATE_NORMAL,         CanNm_NormalSrv,               CanNm_NormalEntry,          CanNm_NormalExit)      \
+    DEFINE_STATE(CANNM_STATE_READY_SLEEP,    CanNm_ReadySleepSrv,           CanNm_ReadySleepEntry,      CanNm_ReadySleepExit)  \
     DEFINE_STATE(CANNM_STATE_PREPARE_SLEEP,  CanNm_PrepareSleepSrv,         CanNm_PrepareSleepEntry,    CanNm_PrepareSleepExit)
 
 
@@ -192,7 +196,7 @@ static void CanNm_NmTimeoutTimerCb(void* pData);
 /// \param pData <br> User data. Not used.
 // --------------------------------------------------------------------------------------------------------------------
 static void CanNm_WaitBusSleepTimerCb(void* pData);
-
+static void CanNm_SleepWaitTxFifoClearTimerCb(void* pData);
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief A timer callback of Delay Sleep.
 ///
@@ -215,11 +219,12 @@ bool_t NM_enable_flag = true;
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief used to count for sleep
 // --------------------------------------------------------------------------------------------------------------------
-uint32_t SleepToShutDownCount=10;
+uint32_t SleepToShutDownCount=CANNM_POWERDOWN_TIMEPERIOD;
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief used to count for sleep
 // --------------------------------------------------------------------------------------------------------------------
 
+static uint32_t NM_Wakeup_Reason = NM_Wakeup_None;
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief Service Instance of the CAN Network Management
 ///
@@ -269,6 +274,8 @@ LIBFIFO_DEFINE_INST(CanNm_NmMsgRecvFifo,
 // --------------------------------------------------------------------------------------------------------------------
 static S_LibTimer_Inst_t CanNm_PduTransmitTimer = LIBTIMER_INIT_TIMER(CanNm_PduTransmitTimerCb, NULL);
 
+// static S_LibTimer_Inst_t CanNm_PduImmediateTransmitTimer = LIBTIMER_INIT_TIMER(CanNm_PduImmediateTransmitTimerCb, NULL);
+
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief  Instance of the timer used to guard the PDU transmission timeout.
 // --------------------------------------------------------------------------------------------------------------------
@@ -293,6 +300,9 @@ static S_LibTimer_Inst_t CanNm_NormalStateTimer = LIBTIMER_INIT_TIMER(CanNm_Norm
 /// \brief  Instance of the timer used to count the Wait Bus-Sleep Time
 // --------------------------------------------------------------------------------------------------------------------
 static S_LibTimer_Inst_t CanNm_WaitBusSleepTimer = LIBTIMER_INIT_TIMER(CanNm_WaitBusSleepTimerCb, NULL);
+
+static S_LibTimer_Inst_t CanNm_SleepWaitTxFifoClearTimer = LIBTIMER_INIT_TIMER(CanNm_SleepWaitTxFifoClearTimerCb, NULL);
+
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief  Instance of the timer used to delay sleep Time
 // --------------------------------------------------------------------------------------------------------------------
@@ -352,7 +362,7 @@ static void CanNM_OpenNmSwitchByJumpsignal(void)
 		}
 		else if( CanNm_GetCurrentState() == CANNM_STATE_SLEEP )
 		{
-			bool_t rv = LibTimer_Start(&PowerDown_DelaySleepTimer, 10, 10);
+			bool_t rv = LibTimer_Start(&PowerDown_DelaySleepTimer, CANNM_POWERDOWN_TIMEPERIOD, CANNM_POWERDOWN_TIMEPERIOD);
             /* call PowerDown_DelaySleepTimerCb goto shutdown when SleepToShutDownCount to 0 */
 			Lib_Assert(rv != false);
 		}
@@ -370,15 +380,10 @@ static void CanNm_ServiceHndl(void* pData)
     if (LibService_CheckClearEvent(&CanNm_Service, LIBSERVICE_EV_INIT | LIBSERVICE_EV_RE_INIT) != false)
     {
         LibLog_Info("CanNm: Initialization");
-        //鍥犱负瑕佸幓鎺塏M鍔熻兘锛屾墠鍔犵殑姝ゅ锛屾敞閲婃帀浜嗕笅杈圭殑銆傝嫢鎭㈠锛屽垯娉ㄦ帀姝ゅ彞锛屾墦寮€涓嬭竟涓ゅ彞 锛屾敞鎰忚繕瑕佹洿鏀瑰欢鏃跺畾鏃跺櫒鐨勫洖璋冨嚱
+
         if(NM_enable_flag == false)
         {
         	Nm_NetworkMode();
-        }
-        else
-        {
-        	bool_t rv = LibTimer_Start(&PowerDown_DelaySleepTimer, 10, 10);
-        	Lib_Assert(rv != false);
         }
         CanNMHistory_Load();
         CanNmHistory_PushState(CANNM_HIST_OFF);
@@ -401,26 +406,9 @@ static void CanNm_ServiceHndl(void* pData)
     // in repeat and normal state need send PDU period
     if (LibService_CheckClearEvent(&CanNm_Service, CANNM_SRV_EV_TRANSMIT_PDU) != false)
     {
-
-        /*Depend on GWM's requirements,AMP CAN_NM be wake-uped by other CAN NM Msg
-        and into NM Normal Transmit State*/
-        if (CanNm_GetCurrentState() == CANNM_STATE_REPEAT_MESSAGE)
-        {
-        	CanNm_TransmitNmPdu();
-        }
-        else if(CanNm_GetCurrentState() == CANNM_STATE_NORMAL)
-        {
-        	CanNm_TransmitNmPdu();
-        }
-
-        if(CanNm_FirstWakeup_InitFlag == false)
-        {
-            CanNm_FirstWakeup_InitFlag = true;
-            LibCanIL_SetSignal(LIBCANIL_SIG_GETHUTINFOSTS, 1);
-		    LibCanIL_SendEventMsgStart(LIBCANIL_MSG_AMP2);
-        }
-
+        CanNm_TransmitNmPdu();
     }
+
 
     if (LibService_CheckClearEvent(&CanNm_Service, CANNM_SRV_EV_TRANSMIT_PDU_TIMEOUT) != false)
     {
@@ -444,11 +432,16 @@ static void CanNm_ServiceHndl(void* pData)
             Lib_Assert(rv != false);
         }
     }
+    
+    if (LibService_CheckClearEvent(&CanNm_Service, CANNM_SRV_EV_PREPARE_SLEEP_TXFIFO_CLEAR) != false)
+    {
+        LibTimer_Stop(&CanNm_SleepWaitTxFifoClearTimer);
+    }
 
     //when timeout, in repeat msg state need to enter normal or readysleep state
     if (LibService_CheckClearEvent(&CanNm_Service, CANNM_SRV_EV_REPEAT_MSG_TIMEOUT) != false)
     {
-        if (CanNm_NetworkRequested == true)
+        if(CanNm_NetworkRequested == true)
         {
             CanNm_NetworkRequested = false;
             CanNm_DispatchEvent(CANNM_EV_NORMAL);
@@ -481,6 +474,10 @@ static void CanNm_ServiceHndl(void* pData)
         CanNm_DispatchEvent(CANNM_EV_GO_TO_SLEEP);
     }
 
+    if (LibService_CheckClearEvent(&CanNm_Service, CANNM_SRV_EV_GO_TO_SLEEP_TIMEOUT) != false)
+    {
+        LibTimer_Stop(&PowerDown_DelaySleepTimer);
+    }
 }
 
 //=====================================================================================================================
@@ -490,6 +487,11 @@ static void CanNm_PduTransmitTimerCb(void* pData)
 {
     LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_TRANSMIT_PDU);
 }
+
+// static void CanNm_PduImmediateTransmitTimerCb(void* pData)
+// {
+//     LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_IMMEDIATE_TRANSMIT_PDU);
+// }
 
 //=====================================================================================================================
 // CanNm_PduPeriodicTxTimeoutCb:
@@ -505,6 +507,10 @@ static void CanNm_PduPeriodicTxTimeoutCb(void* pData)
 //=====================================================================================================================
 static void CanNm_RepeatedMsgStateTimerCb(void* pData)
 {
+    if(NM_Wakeup_Reason != NM_Wakeup_None)
+    {
+        CanNm_NetworkRequested = true;
+    }
     LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_REPEAT_MSG_TIMEOUT);
 }
 
@@ -523,6 +529,10 @@ static void CanNm_NormalStateTimerCb(void* pData)
 //=====================================================================================================================
 static void CanNm_NmTimeoutTimerCb(void* pData)
 {
+    if(NM_Wakeup_Reason != NM_Wakeup_None)
+    {
+        CanNm_NetworkRequested = true;
+    }
     LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_PREPARE_SLEEP);
 }
 
@@ -533,28 +543,37 @@ static void CanNm_WaitBusSleepTimerCb(void* pData)
 {
     LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_GO_TO_SLEEP);
 }
+
+static void CanNm_SleepWaitTxFifoClearTimerCb(void* pData)
+{
+    void *pMsg = LibFifoQueue_GetItem(&LibCanIL_MsgReqFifo, UINT32_C(0));
+    if (pMsg == NULL)
+    {
+        LibCanIL_TxStop();
+        LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_PREPARE_SLEEP_TXFIFO_CLEAR);
+    }
+}
 //=====================================================================================================================
 // PowerDown_DelaySleepTimerCb:
 //=====================================================================================================================
 static void PowerDown_DelaySleepTimerCb(void* pData)
-{//娉ㄦ帀涓嬭竟鐨勬槸鍥犱负瑕佸彇娑圢M鍔熻兘锛岃嫢鎯冲紑鍚垯瑕佹墦寮€涓嬭竟鐨勮鍙ワ紝娉ㄦ剰杩樺拰鍒濆鍖栨湁鍏崇郴;鍦╡s瀹為獙鏃讹紝鍙戠幇姝や唬鐮佹棤褰卞搷锛屾晠鎭㈠鎵撳紑姝や唬
-	if (SleepToShutDownCount==0xFFFFFFFF)
+{
+	if(SleepToShutDownCount>=CANNM_POWERDOWN_TIMEPERIOD)
 	{
-
-	}else if(SleepToShutDownCount>=10)
+		SleepToShutDownCount-=CANNM_POWERDOWN_TIMEPERIOD;
+	}
+    else if( (SleepToShutDownCount==0)&&(NM_enable_flag) )
 	{
-		SleepToShutDownCount-=10;
-	}else if( (SleepToShutDownCount==0)&&(NM_enable_flag) )
-	{
-
 		LibCanIL_TxDisable();
 		LibCanIL_RxStop();
-
+#if 0
 		LibCanTP_TxDisable();
 		LibCanTP_RxStop();
+#endif /* jianggang */
 
 		SLEEP_TO_SHUT_DOWN();
 		LibLog_Info(": SleepTimerCb go to SLEEP");
+        LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_GO_TO_SLEEP_TIMEOUT);
 	}
 }
 
@@ -569,6 +588,8 @@ static void CanNm_SleepEntry(void* pData)
     CanNm_Appframe_RxEnable = false;
 
     Nm_BusSleepMode();
+    bool_t rv = LibTimer_Start(&PowerDown_DelaySleepTimer, CANNM_POWERDOWN_TIMEPERIOD, CANNM_POWERDOWN_TIMEPERIOD);
+    Lib_Assert(rv != false);
 }
 
 //=====================================================================================================================
@@ -583,10 +604,25 @@ static void CanNm_SleepSrv(void* pData)
         LibFifoQueue_Pop(&CanNm_NmMsgRecvFifo);
     }
 }
-
+//=====================================================================================================================
+// CanNm_SleepExit: FSM Sleep State Exit
+//=====================================================================================================================
+static void CanNm_SleepExit(void* pData)
+{
+    LibTimer_Stop(&PowerDown_DelaySleepTimer);
+}
 //=====================================================================================================================
 // CanNm_RepeatMessageEntry: FSM Repeat Message State Entry
 //=====================================================================================================================
+static void CanNm_RepeatMessageImmediateTransmissionCb(void)
+{
+    if(LibTimer_GetTimeLeft_ms(&CanNm_PduTransmitTimer) == 0U)
+    {
+        bool_t rv = LibTimer_Start(&CanNm_PduTransmitTimer, CANNM_PDU_TRANSMIT_PERIOD_MS, CANNM_PDU_TRANSMIT_PERIOD_MS);
+        Lib_Assert(rv != false);
+    }
+}
+
 static void CanNm_RepeatMsgEntry(void* pData)
 {
 	LibLog_Info("CanNm: Enter New State - RepeatMsg");
@@ -602,16 +638,26 @@ static void CanNm_RepeatMsgEntry(void* pData)
     bool_t rv = LibTimer_Start(&CanNm_RepeatedMsgStateTimer, CANNM_REPEAT_MESSAGE_STATE_TIME_MS, UINT32_C(0));
     Lib_Assert(rv != false);
 
-    // Start the transmittimer only if stopped.
-    if(LibTimer_GetTimeLeft_ms(&CanNm_PduTransmitTimer) == 0U)
+    if(NM_Wakeup_Local & NM_Wakeup_Reason)
     {
-        rv = LibTimer_Start(&CanNm_PduTransmitTimer, CANNM_PDU_TRANSMIT_PERIOD_MS, CANNM_PDU_TRANSMIT_PERIOD_MS);
-        Lib_Assert(rv != false);
+        LibCanIL_SendEventMsgStart(LIBCANIL_MSG_COMMONTESTTX_NM, CanNmImmediateNmTransmissions, CanNmImmediateNmCycleTime, CanNm_RepeatMessageImmediateTransmissionCb);
+    }
+    else
+    {
+        // Start the transmittimer only if stopped.
+        if(LibTimer_GetTimeLeft_ms(&CanNm_PduTransmitTimer) == 0U)
+        {
+            rv = LibTimer_Start(&CanNm_PduTransmitTimer, CANNM_PDU_TRANSMIT_PERIOD_MS, CANNM_PDU_TRANSMIT_PERIOD_MS);
+            Lib_Assert(rv != false);
+        }
     }
 
     //start CanNm_NmTimeoutTimer
-    rv = LibTimer_Start(&CanNm_NmTimeoutTimer, CANNM_NM_TIMEOUT_TIME_MS, UINT32_C(0));
-    Lib_Assert(rv != false);
+    if(LibTimer_GetTimeLeft_ms(&CanNm_NmTimeoutTimer) == 0U)
+    {
+        rv = LibTimer_Start(&CanNm_NmTimeoutTimer, CANNM_NM_TIMEOUT_TIME_MS, UINT32_C(0));
+        Lib_Assert(rv != false);
+    }
 }
 
 //=====================================================================================================================
@@ -622,6 +668,14 @@ static void CanNm_RepeatMsgSrv(void* pData)
     const S_LibCan_Msg_t* const msg = LibFifoQueue_GetItem(&CanNm_NmMsgRecvFifo, UINT32_C(0));
     if (msg != NULL)
     {
+        //restart CanNm_NmTimeoutTimer
+        if(LibTimer_GetTimeLeft_ms(&CanNm_NmTimeoutTimer) != 0U)
+        {
+            LibTimer_Stop(&CanNm_NmTimeoutTimer);
+        }
+        bool_t rv = LibTimer_Start(&CanNm_NmTimeoutTimer, CANNM_NM_TIMEOUT_TIME_MS, UINT32_C(0));
+        Lib_Assert(rv != false);
+
         CanNm_NetworkRequested = true;
         LibFifoQueue_Pop(&CanNm_NmMsgRecvFifo);
     }
@@ -648,39 +702,27 @@ static void CanNm_ReadySleepEntry(void* pData)
 }
 
 //=====================================================================================================================
-// CanNm_NormalEntry: FSM Normal State Entry
+// CanNm_ReadySleepSrv: FSM Ready Sleep State Service
 //=====================================================================================================================
-static void CanNm_NormalEntry(void* pData)
-{
-    LibLog_Info("CanNm: Enter New State - Normal");
-    CanNmHistory_PushState(CANNM_HIST_NORMAL_OPERATION_STATE);
-	LibTimer_Stop(&CanNm_PduTransmitTimer);
-   // Start the timer only if stopped.
-    if(LibTimer_GetTimeLeft_ms(&CanNm_PduTransmitTimer) == 0U)
-    {
-    bool_t rv = LibTimer_Start(&CanNm_PduTransmitTimer, CANNM_PDU_TRANSMIT_PERIOD_MS, CANNM_PDU_TRANSMIT_PERIOD_MS);
-        Lib_Assert(rv != false);
-    }
-
-    // start the nomal state timer
-    bool_t rv = LibTimer_Start(&CanNm_NormalStateTimer, CANNM_NORMAL_STATE_TIME_MS, UINT32_C(0));
-    Lib_Assert(rv != false);
-}
-
-//=====================================================================================================================
-// CanNm_ReadySleepAndNomalSrv: FSM Ready Sleep State Service
-//=====================================================================================================================
-static void CanNm_ReadySleepAndNomalSrv(void* pData)
+static void CanNm_ReadySleepSrv(void* pData)
 {
 
     const S_LibCan_Msg_t* const msg = LibFifoQueue_GetItem(&CanNm_NmMsgRecvFifo, UINT32_C(0));
     if (msg != NULL)
     {
+        //restart CanNm_NmTimeoutTimer
+        if(LibTimer_GetTimeLeft_ms(&CanNm_NmTimeoutTimer) != 0U)
+        {
+            LibTimer_Stop(&CanNm_NmTimeoutTimer);
+        }
+        bool_t rv = LibTimer_Start(&CanNm_NmTimeoutTimer, CANNM_NM_TIMEOUT_TIME_MS, UINT32_C(0));
+        Lib_Assert(rv != false);
+
         if (CanNmMsgs_IsRSRSet(msg) == true)
         {
             CanNm_DispatchEvent(CANNM_EV_KEEP_REPEAT); //enter repeat msg state
         }
-        else if(CanNm_GetCurrentState() == CANNM_STATE_READY_SLEEP)
+        else
         {
              CanNm_DispatchEvent(CANNM_EV_START); //enter normal state
         }
@@ -690,7 +732,52 @@ static void CanNm_ReadySleepAndNomalSrv(void* pData)
         LibFifoQueue_Pop(&CanNm_NmMsgRecvFifo);
     }
 }
+//=====================================================================================================================
+// CanNm_NormalEntry: FSM Normal State Entry
+//=====================================================================================================================
+static void CanNm_NormalEntry(void* pData)
+{
+    LibLog_Info("CanNm: Enter New State - Normal");
+    CanNmHistory_PushState(CANNM_HIST_NORMAL_OPERATION_STATE);
 
+   // Start the timer only if stopped.
+    if(LibTimer_GetTimeLeft_ms(&CanNm_PduTransmitTimer) == 0U)
+    {
+        bool_t rv = LibTimer_Start(&CanNm_PduTransmitTimer, CANNM_PDU_TRANSMIT_PERIOD_MS, CANNM_PDU_TRANSMIT_PERIOD_MS);
+        Lib_Assert(rv != false);
+    }
+
+    // start the nomal state timer
+    bool_t rv = LibTimer_Start(&CanNm_NormalStateTimer, CANNM_NORMAL_STATE_TIME_MS, UINT32_C(0));
+    Lib_Assert(rv != false);
+}
+
+//=====================================================================================================================
+// CanNm_NormalSrv: FSM Ready Sleep State Service
+//=====================================================================================================================
+static void CanNm_NormalSrv(void* pData)
+{
+    const S_LibCan_Msg_t* const msg = LibFifoQueue_GetItem(&CanNm_NmMsgRecvFifo, UINT32_C(0));
+    if (msg != NULL)
+    {
+        //restart CanNm_NmTimeoutTimer
+        if(LibTimer_GetTimeLeft_ms(&CanNm_NmTimeoutTimer) != 0U)
+        {
+            LibTimer_Stop(&CanNm_NmTimeoutTimer);
+        }
+        bool_t rv = LibTimer_Start(&CanNm_NmTimeoutTimer, CANNM_NM_TIMEOUT_TIME_MS, UINT32_C(0));
+        Lib_Assert(rv != false);
+        
+        if(CanNmMsgs_IsRSRSet(msg) == true)
+        {
+            CanNm_DispatchEvent(CANNM_EV_KEEP_REPEAT); //enter repeat msg state
+        }
+
+        CanNm_NetworkRequested = true; // network in requested
+
+        LibFifoQueue_Pop(&CanNm_NmMsgRecvFifo);
+    }
+}
 //=====================================================================================================================
 // CanNm_NormalExit: FSM Ready Sleep State Exit
 //=====================================================================================================================
@@ -715,8 +802,7 @@ static void CanNm_PrepareSleepEntry(void* pData)
     LibLog_Info("CanNm: Enter New State - PrepareSleep");
 
     CanNmHistory_PushState(CANNM_HIST_PREPARE_BUS_SLEEP_MODE);
-/****if start NM fun , open flow code********/
-//    Nm_PrepareBusSleepMode();//yue
+
     if(NM_enable_flag != false)
     {
     	Nm_PrepareBusSleepMode();
@@ -725,7 +811,10 @@ static void CanNm_PrepareSleepEntry(void* pData)
 
     LibTimer_Stop(&CanNm_NmTimeoutTimer);
 
-    bool_t rv = LibTimer_Start(&CanNm_WaitBusSleepTimer, CANNM_WAIT_BUS_SLEEP_TIME, UINT32_C(0));
+    bool_t rv = LibTimer_Start(&CanNm_SleepWaitTxFifoClearTimer, CANNM_SLEEP_WAIT_TXFIFO_CLEAR_TIME_MS, CANNM_SLEEP_WAIT_TXFIFO_CLEAR_TIME_MS);
+    Lib_Assert(rv != false);
+
+    rv = LibTimer_Start(&CanNm_WaitBusSleepTimer, CANNM_WAIT_BUS_SLEEP_TIME, UINT32_C(0));
     Lib_Assert(rv != false);
 }
 
@@ -740,13 +829,6 @@ static void CanNm_PrepareSleepSrv(void* pData)
         Nm_NetworkStartIndication();
         LibFifoQueue_Pop(&CanNm_NmMsgRecvFifo);
     }
-    /*
-	if(IL_send_fifo_empty == true)
-	{
-		LibCanIL_TxStop();
-		IL_send_fifo_empty = false;
-	}
-	*/
 }
 
 //=====================================================================================================================
@@ -762,9 +844,9 @@ static void CanNm_PrepareSleepExit(void* pData)
 //=====================================================================================================================
 static void CanNm_TransmitNmPdu(void)
 {
-    S_LibCan_Msg_t *msg;
+    S_LibCan_Msg_t msg;
     CanNmMsgs_BuildNmPDU(&msg);
-    bool_t rv = LibFifoQueue_Push(&CanNm_NmMsgSendFifo, (void*)(msg));
+    bool_t rv = LibFifoQueue_Push(&CanNm_NmMsgSendFifo, (void*)(&msg));
     Lib_Assert(rv != false);
     //pan.sw delete
 	LibService_SetEvent(&TASK_CAN, EV_CAN_MSG_REQ);
@@ -815,3 +897,22 @@ NM_Status CanNM_GetCanNM_Status(void)
    return value;
 }
 
+static uint32_t CanNM_GetWakeUpReason(void)
+{
+    return NM_Wakeup_Reason;
+}
+
+void CanNM_SetWakeUpReason(uint32_t reason)
+{
+    NM_Wakeup_Reason |= reason;
+    if(NM_Wakeup_None != NM_Wakeup_Reason)
+    {
+        Nm_NetworkStartIndication();
+    }
+}
+
+void CanNM_ClearWakeUpReason(uint32_t reason)
+{
+    uint32_t ReasonTemp = ~reason;
+    NM_Wakeup_Reason &= ReasonTemp;
+}

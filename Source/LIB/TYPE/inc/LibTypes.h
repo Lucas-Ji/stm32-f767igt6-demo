@@ -1,3 +1,4 @@
+
 /********************************************************************************
  *
  * \file LibTypes.h
@@ -14,16 +15,25 @@
 /*******************************************************************************
 	Includes File
  *******************************************************************************/
+#include <stdio.h>
 #include <string.h>
 #include <stdint.h>
 #include <stdbool.h>
-#include "LibCanMsg.h"
-#include "portmacro.h"
+//#include "LibCanMsg.h"
+#include "FreeRTOS.h"
 /*******************************************************************************
 	Global Data Types
 *******************************************************************************/
+typedef enum
+{
+    CanChannel_1,
+    CanChannel_2,
+	CanChannel_All
+} E_LibCan_Channel_t;
+
 typedef uint8_t  bool_t;
-typedef uint16_t Ret_t;
+// typedef unsigned char bool_t;
+typedef uint16_t    Ret_t;
 typedef E_LibCan_Channel_t  E_LibDrv_DevId_t;
 typedef void*  pLibDrv_Hndl_t;
 typedef uint32_t EventMaskType;
@@ -69,13 +79,13 @@ typedef union U8BYTES
 #define false                         (0)
 #endif //false
 
-#ifndef Enable
+/* #ifndef Enable
 #define Enable                        (1)
 #endif //Enable
 
 #ifndef Disable
 #define Disable                       (0)
-#endif //Disable
+#endif //Disable */
 
 #ifndef NULL
 #define NULL                          ((void*)0)
@@ -151,12 +161,12 @@ typedef union U8BYTES
 
 
 /* General bit operation */
-#ifndef SET_BIT
-#define SET_BIT(x,y)                  ((x) = (x)|(0x1) << (y))
+#ifndef SET_BIT_NUM
+#define SET_BIT_NUM(x,y)                  ((x) = (x)|(0x1) << (y))
 #endif
 
-#ifndef GET_BIT
-#define GET_BIT(x,y)                  ((uint32_t)((x) >> (y)) & 0x1)
+#ifndef GET_BIT_NUM
+#define GET_BIT_NUM(x,y)                  ((uint32_t)((x) >> (y)) & 0x1)
 #endif
 
 #ifndef GET_LOWBYTE

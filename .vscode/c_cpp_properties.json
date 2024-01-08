@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/Source/BSW/CAN/CAN_MESSAGE/inc",
+                "${workspaceFolder}/Source/BSW/CAN/CAN_IL/inc",
+                "${workspaceFolder}/Source/BSW/CAN/CAN_TP/inc"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "compilerPath": "C:\\APPInstalledC\\TDM-GCC\\bin\\gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
+        }
+    ],
+    "version": 4
+}

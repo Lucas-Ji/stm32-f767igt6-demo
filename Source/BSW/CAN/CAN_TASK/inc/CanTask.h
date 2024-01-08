@@ -127,6 +127,7 @@ void Can_SetCanTransceiverState(E_LibCanTr_State_t state);
 // /// \copydoc LibCanTr_WakeUpReqCallback_t
 void Can_TrcvWakeUpCallback(void);
 
+void LibSystem_WakeUpRequest(const uint32_t runTime_ms);
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief The callback function to be invoked on CAN message received.
 ///

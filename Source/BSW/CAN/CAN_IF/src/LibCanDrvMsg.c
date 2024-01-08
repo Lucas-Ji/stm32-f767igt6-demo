@@ -92,11 +92,6 @@ Ret_t LibMcan_IoCtl(void* pData, uint8_t command)
 			CAN_TxHeaderTypeDef TxMessageHeader;
 			uint8_t TxMessage[LIBCAN_MAXDATABYTENUM];
 			uint32_t txMailbox;
-			txHeader.StdId = 0x123;
-			txHeader.IDE = CAN_ID_STD;
-			txHeader.RTR = CAN_RTR_DATA;
-			txHeader.DLC = 8;
-
 
 			S_LibCan_Msg_t* const pMsg = (S_LibCan_Msg_t*)pData;
 			if(pMsg->IsExtId)

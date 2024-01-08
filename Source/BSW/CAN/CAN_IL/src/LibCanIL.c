@@ -515,36 +515,72 @@ static void LibCanIL_ServiceEvTxEventMessageTimer(void)
 
     bool_t restart_timer = false;
 	bool_t ret;
+	const uint32_t currentTime = LibTimer_GetUpTime_ms();
+	uint32_t nextCallTime = UINT32_MAX;
+	uint8_t loop = UINT8_C(0);
 	// check all tx event messages
-	for(uint8_t loop = UINT8_C(0); loop < LIBCANILCFG_NUMBER_OF_TX_EVENT_MESSAGE; loop++)
+	for(loop = UINT8_C(0); loop < LIBCANILCFG_NUMBER_OF_TX_EVENT_MESSAGE; loop++)
 	{
-		const E_LibCanILCfg_MessageNames_t msgName = LibCanIL_TxEventMessages[loop].MessageNames;
-		if((uint8_t)msgName < LibCanILCfg_MessageTable.NumOfMessages)
+		if((int32_t)(LibCanIL_TxEventMessages[loop].NextCallTime_ms - currentTime) < INT32_C(2))
 		{
-			if(LibCanIL_TxEventMessages[loop].SendTimes > 0)
+			const E_LibCanILCfg_MessageNames_t msgName = LibCanIL_TxEventMessages[loop].MessageNames;
+			if((uint8_t)msgName < LibCanILCfg_MessageTable.NumOfMessages)
 			{
-				restart_timer = true; 
-
-				const S_LibCanIL_MessageDesc_t* pMsgDesc = &LibCanILCfg_MessageTable.pMessageDesc[(uint8_t)msgName];
-				for(uint8_t index=0; index < pMsgDesc->NDataChCbks; index++) 
+				if(LibCanIL_TxEventMessages[loop].SendTimes > 0)
 				{
-					if((((uint8_t)pMsgDesc->FirstMsgRecCbk) + index) < LibCanILCfg_CallbackTable.NumOfCallbacks)
-					LibCanILCfg_CallbackTable.pCallbackDesc[(pMsgDesc->FirstMsgRecCbk) + index].Callback();
+					const S_LibCanIL_MessageDesc_t* pMsgDesc = &LibCanILCfg_MessageTable.pMessageDesc[(uint8_t)msgName];
+					for(uint8_t index=0; index < pMsgDesc->NDataChCbks; index++) 
+					{
+						if((((uint8_t)pMsgDesc->FirstMsgRecCbk) + index) < LibCanILCfg_CallbackTable.NumOfCallbacks)
+						LibCanILCfg_CallbackTable.pCallbackDesc[(pMsgDesc->FirstMsgRecCbk) + index].Callback();
+					}
+
+					// Transmit this message
+					LibCanIL_TransmitMsg(msgName);
+
+					LibCanIL_TxEventMessages[loop].SendTimes --;
+					if(LibCanIL_TxEventMessages[loop].SendTimes == 0)
+					{
+						LibCanIL_TxEventMessages[loop].SendInterval_ms = UINT32_C(0);
+						LibCanIL_TxEventMessages[loop].NextCallTime_ms = UINT32_C(0);
+						if(LibCanIL_TxEventMessages[loop].TxEventMsgFinishCallback != NULL)
+						{
+							LibCanIL_TxEventMessages[loop].TxEventMsgFinishCallback();
+						}
+					}
+					else
+					{
+						restart_timer = true;
+
+						uint32_t IntervalTime_Temp = LibCanIL_TxEventMessages[loop].SendInterval_ms;
+						LibCanIL_TxEventMessages[loop].NextCallTime_ms = currentTime + IntervalTime_Temp;
+					}
 				}
+			}	
+		}
 
-				// Transmit this message
-				LibCanIL_TransmitMsg(msgName);
-
-				LibCanIL_TxEventMessages[loop].SendTimes --;
-			}
-			
-		}	
 	}
 	
 	if(restart_timer == true)
 	{
+		for(loop = UINT8_C(0); loop < LIBCANILCFG_NUMBER_OF_TX_EVENT_MESSAGE; loop++)
+		{
+			uint32_t NextTime_Temp;
+
+			NextTime_Temp = LibCanIL_TxEventMessages[loop].NextCallTime_ms;
+
+			if(NextTime_Temp != UINT32_C(0))
+			{
+				// calculate the next call time
+				const uint32_t msgCallTime = NextTime_Temp - currentTime;
+				if(nextCallTime > msgCallTime)
+				{
+					nextCallTime = msgCallTime;
+				}
+			}
+		}
 		// restart the LibCanIL_TxEventMsgTimer in fixed period
-		ret = LibTimer_Start(&LibCanIL_TxEventMsgTimer, LIBCANIL_EVENT_MSG_SEND_INTERVAL, UINT32_C(0));
+		ret = LibTimer_Start(&LibCanIL_TxEventMsgTimer, nextCallTime, UINT32_C(0));
 	    Lib_Assert(ret);
 	}
 	else
@@ -669,7 +705,7 @@ static void LibCanIL_ServiceEvRxCycleMessageTimer(void)
 //=====================================================================================================================
 // LibCanIL_ServiceEvMessageInd:
 //=====================================================================================================================
-uint8_t Log_IL_count_temp;
+uint16_t Log_IL_count_temp;
 static void LibCanIL_ServiceEvMessageInd(void)
 {
 	do
@@ -695,31 +731,31 @@ static void LibCanIL_ServiceEvMessageInd(void)
 					Log_IL_count_temp = 0;
 					LibLog_Debug("LibCanIL_ReadMessage\n");
 				}
-				if (msgDesc -> IsASWHndle == true)
+#if LIBCANILCFG_NUMBER_OF_RX_CYCLE_MESSAGE 
+				if(LibCanIL_RxMsgMonitor(msgDesc,(E_LibCanILCfg_MessageNames_t)loop) == true)
+#endif
 				{
-					CAN_DATATYPE * const ASWCANFrameData = msgDesc -> ASWCANFrame;;
-					ASWCANFrameData -> Extended = (uint8_T)(pMsg -> IsExtId);
-					ASWCANFrameData -> Length = (uint8_T)(pMsg -> Length);
-					ASWCANFrameData -> ID = (uint32_T)(pMsg -> Id);
-					memcpy((void*)ASWCANFrameData -> Data, (void*)(pMsg -> Data), (size_t)(pMsg -> Length));
-					msgDesc -> ASWHndleFunc();
-
-					// Set all relevant message callbacks to Requested.
-/* 					const S_LibCanIL_MessageDesc_t* pMsgDesc = &LibCanILCfg_MessageTable.pMessageDesc[(uint8_t)msgName]; */
-					const E_LibCanILCfg_CallbackNames_t firstDataChCbk = msgDesc->FirstMsgRecCbk;
-					for(uint8_t cbkLoop = UINT8_C(0); cbkLoop < msgDesc->NDataChCbks; cbkLoop++)
+					if (msgDesc -> IsASWHndle == true)
 					{
-						if ((((uint8_t)firstDataChCbk) + cbkLoop) < LibCanILCfg_CallbackTable.NumOfCallbacks)
+						CAN_DATATYPE * const ASWCANFrameData = msgDesc -> ASWCANFrame;;
+						ASWCANFrameData -> Extended = (uint8_T)(pMsg -> IsExtId);
+						ASWCANFrameData -> Length = (uint8_T)(pMsg -> Length);
+						ASWCANFrameData -> ID = (uint32_T)(pMsg -> Id);
+						memcpy((void*)ASWCANFrameData -> Data, (void*)(pMsg -> Data), (size_t)(pMsg -> Length));
+						msgDesc -> ASWHndleFunc();
+
+						// Set all relevant message callbacks to Requested.
+	/* 					const S_LibCanIL_MessageDesc_t* pMsgDesc = &LibCanILCfg_MessageTable.pMessageDesc[(uint8_t)msgName]; */
+						const E_LibCanILCfg_CallbackNames_t firstDataChCbk = msgDesc->FirstMsgRecCbk;
+						for(uint8_t cbkLoop = UINT8_C(0); cbkLoop < msgDesc->NDataChCbks; cbkLoop++)
 						{
-							LibCanIL_CallbackIsRequested[((uint8_t)firstDataChCbk) + cbkLoop] = true;
+							if ((((uint8_t)firstDataChCbk) + cbkLoop) < LibCanILCfg_CallbackTable.NumOfCallbacks)
+							{
+								LibCanIL_CallbackIsRequested[((uint8_t)firstDataChCbk) + cbkLoop] = true;
+							}
 						}
 					}
-				}
-				else{
-				//GWM RS-IL-14 Only Classical CAN message with DLC = 8 shall be regarded as correct and used
-#if LIBCANILCFG_NUMBER_OF_RX_CYCLE_MESSAGE 
-					if(LibCanIL_RxMsgMonitor(msgDesc,(E_LibCanILCfg_MessageNames_t)loop) == true)
-#endif
+					else
 					{
 						LibCanIL_ReadMessage((E_LibCanILCfg_MessageNames_t)loop, pMsg);	
 					}
@@ -945,7 +981,7 @@ static void LibCanIL_ReadMessage(E_LibCanILCfg_MessageNames_t msgName, const S_L
 						if (oldSigValue != newSigValue)
 						{
 							singal_count++;
-							TR_NOTIFY("s_c %d\r\n",singal_count);
+							LibLog_Info("s_c %d\r\n",singal_count);
 							LibCanIL_SetSignal((E_LibCanILCfg_SignalNames_t)curSignal, newSigValue);
 							LibCanIL_SignalDataChCounter[curSignal]++;
 
@@ -1156,19 +1192,58 @@ static void LibCanIL_MsgConfirm(uint32_t msgId)
 // LibCanIL_SendEventMsgStart:
 //=====================================================================================================================
 #if LIBCANILCFG_NUMBER_OF_TX_EVENT_MESSAGE 
-void LibCanIL_SendEventMsgStart(E_LibCanILCfg_MessageNames_t msgName)
+void LibCanIL_SendEventMsgStart(E_LibCanILCfg_MessageNames_t msgName, uint32_t sendTimes, uint32_t sendInterval, void (*callback)(void))
 {
 	for(uint8_t loop = UINT8_C(0); loop < LIBCANILCFG_NUMBER_OF_TX_EVENT_MESSAGE; loop++)
 	{
 		if(LibCanIL_TxEventMessages[loop].MessageNames == msgName)
 		{
-			LibCanIL_TxEventMessages[loop].SendTimes = LIBCANIL_EVENT_MSG_SEND_TIMES;
-
-            //Start the LibCanIL_TxEventMsgTimer only if stopped.
-			if(LibTimer_GetTimeLeft_ms(&LibCanIL_TxEventMsgTimer) == 0U)
+			if(sendTimes > 0U)
 			{
-				bool_t ret = LibTimer_Start(&LibCanIL_TxEventMsgTimer, LIBCANIL_EVENT_MSG_SEND_INTERVAL, UINT32_C(0));
-				Lib_Assert(ret);
+				const E_LibCanILCfg_MessageNames_t msgName = LibCanIL_TxEventMessages[loop].MessageNames;
+				if((uint8_t)msgName < LibCanILCfg_MessageTable.NumOfMessages)
+				{
+					const S_LibCanIL_MessageDesc_t* pMsgDesc = &LibCanILCfg_MessageTable.pMessageDesc[(uint8_t)msgName];
+					for(uint8_t index=0; index < pMsgDesc->NDataChCbks; index++) 
+					{
+						if((((uint8_t)pMsgDesc->FirstMsgRecCbk) + index) < LibCanILCfg_CallbackTable.NumOfCallbacks)
+						LibCanILCfg_CallbackTable.pCallbackDesc[(pMsgDesc->FirstMsgRecCbk) + index].Callback();
+					}
+
+					// Transmit this message
+					LibCanIL_TransmitMsg(msgName);
+				}
+				sendTimes -= 1;
+
+				if(sendTimes > 0U)
+				{
+					const uint32_t currentTime = LibTimer_GetUpTime_ms();
+					LibCanIL_TxEventMessages[loop].SendTimes = sendTimes;
+					LibCanIL_TxEventMessages[loop].SendInterval_ms = sendInterval;
+					LibCanIL_TxEventMessages[loop].NextCallTime_ms = currentTime + sendInterval;
+					LibCanIL_TxEventMessages[loop].TxEventMsgFinishCallback = callback;
+
+					//Start the LibCanIL_TxEventMsgTimer only if stopped.
+					uint32_t timeLeft = LibTimer_GetTimeLeft_ms(&LibCanIL_TxEventMsgTimer);
+					if(timeLeft == 0U)
+					{
+						bool_t ret = LibTimer_Start(&LibCanIL_TxEventMsgTimer, sendInterval, UINT32_C(0));
+						Lib_Assert(ret);
+					}
+					else if(timeLeft > sendInterval)
+					{
+						LibTimer_Stop(&LibCanIL_TxEventMsgTimer);
+						bool_t ret = LibTimer_Start(&LibCanIL_TxEventMsgTimer, sendInterval, UINT32_C(0));
+						Lib_Assert(ret);
+					}
+				}
+				else
+				{
+					if(callback != NULL)
+					{
+						callback();
+					}
+				}
 			}
 			break;
 		}
@@ -1453,7 +1528,7 @@ void LibCanIL_TxStop(void)
 //=====================================================================================================================
 void LibCanIL_RxStop(void)
 {
-	//LibLog_Info("CAN:IL RX Stop\n");
+	LibLog_Info("CAN:IL RX Stop\n");
 	LibCanIL_ReceiveEnabled = false;
 
 	LibFifoQueue_Clear(&LibCanIL_MsgIndFifo);
@@ -1482,7 +1557,7 @@ void LibCanIL_TxEnable(void)
 //=====================================================================================================================
 void LibCanIL_RxEnable(void)
 {
-	//LibLog_Info("CAN:IL RX Enable\n");
+	LibLog_Info("CAN:IL RX Enable\n");
 	LibCanIL_ReceiveEnabled = true;
 }
 
@@ -1491,7 +1566,7 @@ void LibCanIL_RxEnable(void)
 //=====================================================================================================================
 void LibCanIL_TxDisable(void)
 {
-	//LibLog_Info("CAN:IL TX Disable\n");
+	LibLog_Info("CAN:IL TX Disable\n");
 	LibCanIL_TransmitEnabled = false;
 }
 

@@ -37,28 +37,26 @@ void CanNmMgr_PowerOffIndication(void)
 //=====================================================================================================================
 void CanNmMgr_BusSleepEntered(void)
 {
-	//pan.sw
-    LibSystem_ShutdownRequest(LIBSYSTEM_REQFORRUN_CAN, 0U, LIBAPP_SHUTDOWN_REASON_SHUTDOWN);
-    SleepToShutDownCount = 2000;//go to sleep delay 2s
+	//system shutdown - ECU low power
+    // LibSystem_ShutdownRequest(LIBSYSTEM_REQFORRUN_CAN, 0U, LIBAPP_SHUTDOWN_REASON_SHUTDOWN);
+    //SleepToShutDownCount = 2000;//go to sleep delay 2s
+    LibSystem_WakeUpRequest(CANNM_WAIT_BUS_SLEEP_TIME);
 }
 
 //=====================================================================================================================
 // CanNmMgr_NetworkModeEntered:
 //=====================================================================================================================
-extern void LibSystem_WakeUpRequest(const uint32_t runTime_ms);
 void CanNmMgr_NetworkModeEntered(void)
 {
-    LibSystem_WakeUpRequest(0xFFFFFFFF);
-//    LibCanIL_TxStart();
-//    LibCanIL_RxStart();
-	
-	 //Restart CAN IL
+	//Restart CAN IL
     LibCanIL_TxStart();
     LibCanIL_RxStart();
     
     //Enable CAN TP
+    #if 0
     LibCanTP_TxEnable();
     LibCanTP_RxEnable();
+    #endif /* jianggang */
 }
 
 //=====================================================================================================================
@@ -72,7 +70,9 @@ void CanNmMgr_PrepareBusSleepEntered(void)
 	LibCanIL_TxDisable();
     LibCanIL_RxStop(); 
     
+    #if 0
     LibCanTP_TxDisable();
 	LibCanTP_RxStop();
+    #endif /* jianggang */
 	
 }

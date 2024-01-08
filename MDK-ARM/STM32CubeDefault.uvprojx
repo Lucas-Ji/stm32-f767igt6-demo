@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F767xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include;..\Source\BSW\CAN\CAN_DIAGCOM\inc;../Source/BSW/CAN/CAN_IF/inc;../Source/BSW/CAN/CAN_NM/inc;../Source/Public;../Source/LIB/FIFO/inc;../Source/LIB/FSM/inc;../Source/LIB/SERVICE/inc;../Source/LIB/TIMER/inc;../Source/LIB/TYPE/inc;..\Source\BSW\CAN\CAN_IL\inc;..\Source\BSW\CAN\CAN_MESSAGE\inc;..\Source\BSW\CAN\CAN_TASK\inc;..\Source\BSW\CAN\CAN_TP\inc;..\Source\BSW\UART\inc;..\Source\BSW\UDS\cfg\inc;..\Source\BSW\UDS\cfg</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc;../Drivers/STM32F7xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM7/r0p1;../Drivers/CMSIS/Device/ST/STM32F7xx/Include;../Drivers/CMSIS/Include;../Source/BSW/CAN/CAN_DIAGCOM/inc;../Source/BSW/CAN/CAN_IF/inc;../Source/BSW/CAN/CAN_NM/inc;../Source/Public;../Source/LIB/FIFO/inc;../Source/LIB/FSM/inc;../Source/LIB/SERVICE/inc;../Source/LIB/TIMER/inc;../Source/LIB/TYPE/inc;../Source/BSW/CAN/CAN_IL/inc;../Source/BSW/CAN/CAN_MESSAGE/inc;../Source/BSW/CAN/CAN_TASK/inc;../Source/BSW/CAN/CAN_TP/inc;../Source/BSW/UART/inc;../Source/BSW/UDS/cfg/inc;../Source/BSW/UDS/cfg;..\Source\LIB\TYPE\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -886,18 +886,6 @@
         </Group>
         <Group>
           <GroupName>BSW/CAN/CAN_DIAGCOM</GroupName>
-          <Files>
-            <File>
-              <FileName>LibDiagCom.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\BSW\CAN\CAN_DIAGCOM\src\LibDiagCom.c</FilePath>
-            </File>
-            <File>
-              <FileName>LibUdsAssist.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\BSW\CAN\CAN_DIAGCOM\src\LibUdsAssist.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>BSW/CAN/CAN_IF</GroupName>
@@ -986,28 +974,6 @@
         </Group>
         <Group>
           <GroupName>BSW/CAN/CAN_TP</GroupName>
-          <Files>
-            <File>
-              <FileName>LibCanTp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\BSW\CAN\CAN_TP\src\LibCanTp.c</FilePath>
-            </File>
-            <File>
-              <FileName>LibCanTpCfg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\BSW\CAN\CAN_TP\src\LibCanTpCfg.c</FilePath>
-            </File>
-            <File>
-              <FileName>LibCanTpFsm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\BSW\CAN\CAN_TP\src\LibCanTpFsm.c</FilePath>
-            </File>
-            <File>
-              <FileName>LibCanTpInternal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Source\BSW\CAN\CAN_TP\src\LibCanTpInternal.c</FilePath>
-            </File>
-          </Files>
         </Group>
         <Group>
           <GroupName>BSW/UART</GroupName>

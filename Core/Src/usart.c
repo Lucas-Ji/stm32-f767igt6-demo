@@ -22,13 +22,13 @@
 
 /* USER CODE BEGIN 0 */
 
-/* 接收缓冲, 最大USART_REC_LEN个字节. */
+/* 接收缓冲, �?大USART_REC_LEN个字�?. */
 uint8_t g_usart_rx_buf[USART_REC_LEN];
 
-/*  接收状态
- *  bit15，      接收完成标志
- *  bit14，      接收到0x0d
- *  bit13~0，    接收到的有效字节数目
+/*  接收状�??
+ *  bit15�?      接收完成标志
+ *  bit14�?      接收�?0x0d
+ *  bit13~0�?    接收到的有效字节数目
 */
 uint16_t g_usart_rx_sta = 0;
 

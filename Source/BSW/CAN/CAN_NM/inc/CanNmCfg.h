@@ -33,6 +33,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 #define CANNM_PDU_TRANSMIT_PERIOD_MS UINT32_C(500)
 
+#define CanNmImmediateNmCycleTime   UINT32_C(20)
+#define CanNmImmediateNmTransmissions   UINT32_C(10)
+
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief The time period for which to stay in the REPEAT MESSAGE STATE in [ms]
 /// Defined by AUTOSAR as configuration variable - NM_REPEAT_MESSAGE_TIME
@@ -53,8 +56,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 //  \brief An AUTOSAR configuration parameter in [ms] - NM_WAIT_BUS_SLEEP_TIME
 // --------------------------------------------------------------------------------------------------------------------
-#define CANNM_WAIT_BUS_SLEEP_TIME (UINT32_C(5) * MSEC_PER_SEC)
+#define CANNM_WAIT_BUS_SLEEP_TIME (UINT32_C(2) * MSEC_PER_SEC)
 
+#define CANNM_SLEEP_WAIT_TXFIFO_CLEAR_TIME_MS UINT32_C(10)
 // --------------------------------------------------------------------------------------------------------------------
 //  Module call-backs.
 // --------------------------------------------------------------------------------------------------------------------

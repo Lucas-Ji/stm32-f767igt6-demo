@@ -119,7 +119,7 @@ static const S_LibServiceHost_Inst_t Can_ServiceHost = {
 		sizeof(Can_ServiceTable) / sizeof(Can_ServiceTable[0])
 };
 
-
+void TASK_CAN_ServiceHndl(void* pData);
 // --------------------------------------------------------------------------------------------------------------------
 //	Local Function Prototypes
 // --------------------------------------------------------------------------------------------------------------------
@@ -196,7 +196,8 @@ S_LibTimer_Inst_t CanTask_LostComm_TickCnt_Timer = LIBTIMER_INIT_TIMER(CanTask_L
 //=====================================================================================================================
 void LibSystem_WakeUpRequest(const uint32_t runTime_ms)
 {
-	SleepToShutDownCount=runTime_ms;
+	uint32_t runTime_Temp = runTime_ms/CANNM_POWERDOWN_TIMEPERIOD;
+	SleepToShutDownCount = runTime_Temp * CANNM_POWERDOWN_TIMEPERIOD;
 }
 
 //=====================================================================================================================
@@ -313,6 +314,14 @@ void TASK_CAN_ServiceHndl(void* pData)
 		Can2IfDrv_Init();
 	}
 	
+	if (LibService_CheckClearEvent(&TASK_CAN, LIBSERVICE_EV_TRIGGER_SHUTDOWN))
+	{
+		LibLog_Info("CANTSAK Service Trigger shutdown\n");
+		LibService_Terminate(&TASK_CAN);
+		Can1IfDrv_Deinit();
+		Can2IfDrv_Deinit();
+	}
+
 	if(LibService_CheckClearEvent(&TASK_CAN, EV_CAN_ALIVE))
 	{
 
@@ -325,7 +334,9 @@ void TASK_CAN_ServiceHndl(void* pData)
 
 	if(LibService_CheckClearEvent(&TASK_CAN, EV_CAN_WAKEUP))
 	{
+		#if 0
 		Can_StartNormalComm();
+		#endif
 	}
 
 	if(LibService_CheckClearEvent(&TASK_CAN, EV_CAN_MSG_RCVD))
@@ -366,14 +377,6 @@ void TASK_CAN_ServiceHndl(void* pData)
 	if(LibService_CheckClearEvent(&TASK_CAN, EV_TRIGGER_SHUTDOWN))
 	{
 		Can_TriggerShutdown(&Can_ServiceHost);
-	}
-
-	if (LibService_CheckClearEvent(&TASK_CAN, LIBSERVICE_EV_TRIGGER_SHUTDOWN))
-	{
-		LibLog_Info("CANTSAK Service Trigger shutdown\n");
-		Can1IfDrv_Deinit();
-		Can2IfDrv_Deinit();
-		LibService_Terminate(&TASK_CAN);
 	}
 }
 
@@ -461,6 +464,7 @@ static void Can_TransmitCanMsgs(void)
      while (true);
 
 	//handles all transmit massages from Transport Protocol
+	#if 0
 	do
 	{
 		S_LibCanTp_MsgReqBufferEntry_t*	pMsg;
@@ -478,6 +482,7 @@ static void Can_TransmitCanMsgs(void)
 		LibFifoQueue_Pop(&LibCanTp_MsgReqFifo);
 	}
 	while (true);
+	#endif /* jianggang */
 
 	// handles all transmit massages from Interaction Layer
 	do
@@ -489,7 +494,7 @@ static void Can_TransmitCanMsgs(void)
 			break;
 		}
 		
-		ret = LibMcan_IoCtl(&pMsg, LIBCAN_IOCTL_SEND_MSG,);
+		ret = LibMcan_IoCtl(&pMsg, LIBCAN_IOCTL_SEND_MSG);
 		if (LIBRET_OK != ret)
 		{
 			LibLog_Info("CAN: Cannot handle message: %d", ret);
@@ -571,8 +576,10 @@ static void Can_StartNormalComm(void)
 	 LibCanIL_RxStart();
 	 LibCanIL_TxStart();
 	 //Enable the CANTP
+	 #if 0
 	 LibCanTP_RxEnable();
 	 LibCanTP_TxEnable();
+	 #endif
 }
 
 

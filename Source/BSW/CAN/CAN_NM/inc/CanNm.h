@@ -27,19 +27,23 @@
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief Number of messages allowed in the SEND FIFO
 // --------------------------------------------------------------------------------------------------------------------
-#define CANNM_NM_MSG_SEND_FIFO_ELEMENTS 1
+#define CANNM_NM_MSG_SEND_FIFO_ELEMENTS 8
 
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief Number of messages allowed in the RECEIVE FIFO
 // --------------------------------------------------------------------------------------------------------------------
-#define CANNM_NM_MSG_RECV_FIFO_ELEMENTS 1
+#define CANNM_NM_MSG_RECV_FIFO_ELEMENTS 8
 
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief Number of messages allowed in the CONFIRM FIFO
 // --------------------------------------------------------------------------------------------------------------------
-#define CANNM_NM_MSG_CON_FIFO_ELEMENTS 1
+#define CANNM_NM_MSG_CON_FIFO_ELEMENTS 8
 
+#define CANNM_POWERDOWN_TIMEPERIOD                       UINT32_C(10)
 
+#define	NM_Wakeup_None		UINT32_C(0x00000000)
+#define	NM_Wakeup_Local		UINT32_C(0x00000001)
+#define	NM_Wakeup_Remote	UINT32_C(0x00000002)
 
 
 /// \brief Can NM status
@@ -104,5 +108,9 @@ void CanNM_ReleaseNetwork(void);
 NM_Status CanNM_GetCanNM_Status(void);
 //pan.sw add
 //bool_t IL_send_fifo_empty = false;
+
+extern void CanNM_SetWakeUpReason(uint32_t reason);
+
+extern void CanNM_ClearWakeUpReason(uint32_t reason);
 
 #endif /* BSW_CAN_CAN_NM_INC_CANNM_H_ */
