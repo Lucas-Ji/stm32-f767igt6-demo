@@ -22,6 +22,8 @@
         "deprecated_definitions.h": "c",
         "stddef.h": "c",
         "cmsis_os.h": "c",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "stdio.h": "c",
+        "cmsis_os2.h": "c"
     }
 }

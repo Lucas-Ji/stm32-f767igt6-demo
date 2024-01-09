@@ -55,6 +55,7 @@
 ".\stm32cubedefault\cannmmgr.o"
 ".\stm32cubedefault\cannmmsgs.o"
 ".\stm32cubedefault\cantask.o"
+".\stm32cubedefault\dio.o"
 ".\stm32cubedefault\uartif.o"
 ".\stm32cubedefault\libfifoqueue.o"
 ".\stm32cubedefault\libfsm.o"

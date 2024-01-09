@@ -869,11 +869,14 @@ static void LibCanIL_WriteMessage(E_LibCanILCfg_MessageNames_t msgName, S_LibCan
 			}
 
 			// set message dependent setup
+			pMsg->CanDevId = pMsgDesc->CanDevId;
 			pMsg->Id = pMsgDesc->Id;
 			pMsg->IsExtId = pMsgDesc->IsExtId;
 			pMsg->IsCanFd = false;
 			pMsg->IsBrs = false;
+			pMsg->IsRemote = false;
 			pMsg->Length = pMsgDesc->Length;
+			pMsg->Timestamp = 0U;
 		}
 	}
 }

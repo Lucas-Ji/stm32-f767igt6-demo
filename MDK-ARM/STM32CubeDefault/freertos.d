@@ -53,6 +53,7 @@
   D:\APPInstalled\Keil\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdio.h \
   D:\APPInstalled\Keil\Keil_v5\ARM\ARMCLANG\Bin\..\include\string.h \
   D:\APPInstalled\Keil\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h \
+  ..\Source\BSW\UART\inc\UartIF.h ..\Core\Inc\usart.h \
   ..\Source\LIB\FSM\inc\LibFsm.h ..\Source\LIB\FSM\inc\LibFsmInternals.h \
   ..\Source\LIB\FSM\inc\LibFsmCfg.h \
   ..\Source\LIB\SERVICE\inc\LibService.h \

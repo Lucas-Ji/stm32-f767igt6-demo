@@ -20,7 +20,7 @@
 #define CANNM_SRV_EV_GO_TO_SLEEP                        UINT32_C(0x00000040)
 #define CANNM_SRV_EV_GO_TO_SLEEP_TIMEOUT                UINT32_C(0x00000080)
 #define CANNM_SRV_EV_REPEAT_MSG_TIMEOUT                 UINT32_C(0x00000100)
-#define CANNM_SRV_EV_TASK                               UINT32_C(0x00000200)
+#define CANNM_SRV_EV_WakeUp                             UINT32_C(0x00000200)
 
 // ----------------------------------------------------------------
 
@@ -312,7 +312,7 @@ static S_LibTimer_Inst_t PowerDown_DelaySleepTimer = LIBTIMER_INIT_TIMER(PowerDo
 /// \brief  The state of the network from the NM point of view.
 // --------------------------------------------------------------------------------------------------------------------
 static bool_t CanNm_NetworkRequested = false;
-
+static uint32_t CanNm_RepeatMsgImmediateNum = CanNmImmediateNmTransmissions;
 // --------------------------------------------------------------------------------------------------------------------
 /// \brief  The state of the app frame Rx enable or not.
 // --------------------------------------------------------------------------------------------------------------------
@@ -395,6 +395,11 @@ static void CanNm_ServiceHndl(void* pData)
         LibLog_Info("CanNm: Shutdown");
         CanNMHistory_Save();
         LibService_Terminate(&CanNm_Service);
+    }
+    
+    if (LibService_CheckClearEvent(&CanNm_Service, CANNM_SRV_EV_WakeUp) != false)
+    {
+        Nm_NetworkStartIndication();
     }
 
     if (LibService_CheckClearEvent(&CanNm_Service, CANNM_SRV_EV_MSG_INDICATE) != false)
@@ -485,6 +490,16 @@ static void CanNm_ServiceHndl(void* pData)
 //=====================================================================================================================
 static void CanNm_PduTransmitTimerCb(void* pData)
 {
+    if(CanNm_RepeatMsgImmediateNum > 1U)
+    {
+        CanNm_RepeatMsgImmediateNum--;
+    }
+    else if(CanNm_RepeatMsgImmediateNum == 1U)
+    {
+        CanNm_RepeatMsgImmediateNum--;
+        LibTimer_Stop(&CanNm_PduTransmitTimer);
+        LibTimer_Start(&CanNm_PduTransmitTimer, CANNM_PDU_TRANSMIT_PERIOD_MS, CANNM_PDU_TRANSMIT_PERIOD_MS);
+    }
     LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_TRANSMIT_PDU);
 }
 
@@ -572,7 +587,7 @@ static void PowerDown_DelaySleepTimerCb(void* pData)
 #endif /* jianggang */
 
 		SLEEP_TO_SHUT_DOWN();
-		LibLog_Info(": SleepTimerCb go to SLEEP");
+		/* LibLog_Info(": SleepTimerCb go to SLEEP"); */
         LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_GO_TO_SLEEP_TIMEOUT);
 	}
 }
@@ -638,9 +653,15 @@ static void CanNm_RepeatMsgEntry(void* pData)
     bool_t rv = LibTimer_Start(&CanNm_RepeatedMsgStateTimer, CANNM_REPEAT_MESSAGE_STATE_TIME_MS, UINT32_C(0));
     Lib_Assert(rv != false);
 
+    CanNm_RepeatMsgImmediateNum = CanNmImmediateNmTransmissions;
     if(NM_Wakeup_Local & NM_Wakeup_Reason)
     {
-        LibCanIL_SendEventMsgStart(LIBCANIL_MSG_COMMONTESTTX_NM, CanNmImmediateNmTransmissions, CanNmImmediateNmCycleTime, CanNm_RepeatMessageImmediateTransmissionCb);
+        if(LibTimer_GetTimeLeft_ms(&CanNm_PduTransmitTimer) == 0U)
+        {
+        // LibCanIL_SendEventMsgStart(LIBCANIL_MSG_COMMONTESTTX_NM, CanNmImmediateNmTransmissions, CanNmImmediateNmCycleTime, CanNm_RepeatMessageImmediateTransmissionCb);
+            rv = LibTimer_Start(&CanNm_PduTransmitTimer, CanNmImmediateNmCycleTime, CanNmImmediateNmCycleTime);
+            Lib_Assert(rv != false);
+        }
     }
     else
     {
@@ -686,6 +707,7 @@ static void CanNm_RepeatMsgSrv(void* pData)
 //=====================================================================================================================
 static void CanNm_RepeatMsgExit(void* pData)
 {
+    CanNm_RepeatMsgImmediateNum = CanNmImmediateNmTransmissions;
     LibCanIL_SetSignal(LIBCANIL_NMSIG_COMMONTESTTX_CBV_REPEAT_MSG_REQ,0x00);//fill in the byte of RepeatMsg State : 1-not in repeatmsg state
 	LibTimer_Stop(&CanNm_RepeatedMsgStateTimer);
 }
@@ -907,7 +929,7 @@ void CanNM_SetWakeUpReason(uint32_t reason)
     NM_Wakeup_Reason |= reason;
     if(NM_Wakeup_None != NM_Wakeup_Reason)
     {
-        Nm_NetworkStartIndication();
+        LibService_SetEvent(&CanNm_Service, CANNM_SRV_EV_WakeUp);
     }
 }
 

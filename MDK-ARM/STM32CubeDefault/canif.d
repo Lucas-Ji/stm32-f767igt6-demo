@@ -50,6 +50,7 @@
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1\portmacro.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h \
+  ..\Source\BSW\UART\inc\UartIF.h ..\Core\Inc\usart.h \
   ..\Source\BSW\CAN\CAN_TASK\inc\CanTask.h \
   ..\Source\BSW\CAN\CAN_TASK\inc\CanTask_Cfg.h \
   ..\Source\LIB\SERVICE\inc\LibService.h \

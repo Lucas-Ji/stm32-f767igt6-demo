@@ -246,15 +246,15 @@ void CAN1_SCE_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
   /* USER CODE BEGIN USART1_IRQn 0 */
-  uint32_t timeout = 0;
-  uint32_t maxDelay = 0x1FFFF;
+/*   uint32_t timeout = 0;
+  uint32_t maxDelay = 0x1FFFF; */
   /* USER CODE END USART1_IRQn 0 */
   HAL_UART_IRQHandler(&huart1);
   /* USER CODE BEGIN USART1_IRQn 1 */
-  timeout = 0;
-  while (HAL_UART_GetState(&huart1) != HAL_UART_STATE_READY) /* 等待就绪 */
+/*   timeout = 0;
+  while (HAL_UART_GetState(&huart1) != HAL_UART_STATE_READY)
   {
-      timeout++;                       /* 超时处理 */
+      timeout++;
       if(timeout > maxDelay)
       {
           break;
@@ -263,15 +263,14 @@ void USART1_IRQHandler(void)
     
   timeout=0;
   
-  /* 一次处理完成之后，重新开启中断并设置RxXferCount为1 */
   while (HAL_UART_Receive_IT(&huart1, (uint8_t *)g_rx_buffer, RXBUFFERSIZE) != HAL_OK)
   {
-      timeout++;                      /* 超时处理 */
+      timeout++;
       if (timeout > maxDelay)
       {
           break;
       }
-  }
+  } */
   /* USER CODE END USART1_IRQn 1 */
 }
 

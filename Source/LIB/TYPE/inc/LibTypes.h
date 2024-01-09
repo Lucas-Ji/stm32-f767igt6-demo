@@ -21,6 +21,7 @@
 #include <stdbool.h>
 //#include "LibCanMsg.h"
 #include "FreeRTOS.h"
+#include "UartIF.h"
 /*******************************************************************************
 	Global Data Types
 *******************************************************************************/
@@ -207,16 +208,16 @@ typedef union U8BYTES
 /*******************************************************************************
 	Global Function Prototypes
  *******************************************************************************/
-#define SuspendAllInterrupts()       portENTER_CRITICAL()
-#define ResumeAllInterrupts()        portEXIT_CRITICAL()
+#define SuspendAllInterrupts()       __disable_irq()
+#define ResumeAllInterrupts()        __enable_irq()
 #define Exception()
 #define Lib_Assert(condition)	    do { if (!(condition)) { Exception(); } } while(false)
 #define LIB_UNUSED(x)               ((void)(x))
 
-#define LibLog_Info       printf
-#define LibLog_Debug      printf
-#define LibLog_Warning    printf
-#define LibLog_Error      printf
+#define LibLog_Info(format, ...)       VirtualPrintf/* printf */
+#define LibLog_Debug(format, ...)      VirtualPrintf/* printf */
+#define LibLog_Warning(format, ...)    VirtualPrintf/* printf */
+#define LibLog_Error(format, ...)      VirtualPrintf/* printf */
 
 void STR16_BIG(uint8_t* pDesbuff, uint16_t Sourdata);
 void STR32_BIG(uint8_t* pDesbuff, uint32_t Sourdata);

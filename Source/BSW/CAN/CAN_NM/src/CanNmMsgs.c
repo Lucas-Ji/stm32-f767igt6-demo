@@ -144,11 +144,14 @@ static void CanNmMsgs_WriteMessage(E_LibCanILCfg_MessageNames_t msgName, S_LibCa
 			}
 
 			// set message dependent setup
+			pMsg->CanDevId = pMsgDesc->CanDevId;
 			pMsg->Id = pMsgDesc->Id;
 			pMsg->IsExtId = pMsgDesc->IsExtId;
 			pMsg->IsCanFd = false;
 			pMsg->IsBrs = false;
+			pMsg->IsRemote = false;
 			pMsg->Length = pMsgDesc->Length;
+			pMsg->Timestamp = 0U;
 		}
 	}
 }
@@ -163,7 +166,7 @@ void CanNmMsgs_BuildNmPDU(S_LibCan_Msg_t* pduMsg)
 
     /* Byte0: Source node ID 	 									            */
     nmDataTemp = (uint8_t)(CAN_NM_TX_NODE_ID & 0xFF);
-    LibCanIL_SetSignal(LIBCANIL_NMSIG_COMMONTESTRX_NODEID, nmDataTemp);
+    LibCanIL_SetSignal(LIBCANIL_NMSIG_COMMONTESTTX_NODEID, nmDataTemp);
 
     CanNmMsgs_WriteMessage(LIBCANIL_MSG_COMMONTESTTX_NM, pduMsg);
 }

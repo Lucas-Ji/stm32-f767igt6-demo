@@ -304,14 +304,18 @@ void TASK_CAN_ServiceHndl(void* pData)
 		LibLog_Info("CANTASK Service INIT\n");
 		Can1IfDrv_Init();
 		Can2IfDrv_Init();
+		LibMcan_IoCtl(NULL,LIBCAN_IOCTL_START);
 	}
 
 	// Reinitialize the service
 	if (LibService_CheckClearEvent(&TASK_CAN, LIBSERVICE_EV_RE_INIT))
 	{
 		LibLog_Info("CANTASK Service REINIT\n");
+		Can1IfDrv_Deinit();
+		Can2IfDrv_Deinit();
 		Can1IfDrv_Init();
 		Can2IfDrv_Init();
+		LibMcan_IoCtl(NULL,LIBCAN_IOCTL_START);
 	}
 	
 	if (LibService_CheckClearEvent(&TASK_CAN, LIBSERVICE_EV_TRIGGER_SHUTDOWN))

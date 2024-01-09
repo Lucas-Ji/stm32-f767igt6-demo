@@ -14,9 +14,8 @@
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\deprecated_definitions.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\portable\RVDS\ARM_CM7\r0p1\portmacro.h \
   ..\Middlewares\Third_Party\FreeRTOS\Source\include\mpu_wrappers.h \
-  ..\Source\BSW\CAN\CAN_MESSAGE\inc\LibCanMsg.h \
-  ..\Source\BSW\CAN\CAN_IF\inc\CanIF.h ..\Core\Inc\can.h \
-  ..\Core\Inc\main.h ..\Drivers\STM32F7xx_HAL_Driver\Inc\stm32f7xx_hal.h \
+  ..\Source\BSW\UART\inc\UartIF.h ..\Core\Inc\usart.h ..\Core\Inc\main.h \
+  ..\Drivers\STM32F7xx_HAL_Driver\Inc\stm32f7xx_hal.h \
   ..\Core\Inc\stm32f7xx_hal_conf.h \
   ..\Drivers\STM32F7xx_HAL_Driver\Inc\stm32f7xx_hal_rcc.h \
   ..\Drivers\STM32F7xx_HAL_Driver\Inc\stm32f7xx_hal_def.h \
@@ -51,6 +50,8 @@
   ..\Drivers\STM32F7xx_HAL_Driver\Inc\stm32f7xx_hal_rtc_ex.h \
   ..\Drivers\STM32F7xx_HAL_Driver\Inc\stm32f7xx_hal_uart.h \
   ..\Drivers\STM32F7xx_HAL_Driver\Inc\stm32f7xx_hal_uart_ex.h \
+  ..\Source\BSW\CAN\CAN_MESSAGE\inc\LibCanMsg.h \
+  ..\Source\BSW\CAN\CAN_IF\inc\CanIF.h ..\Core\Inc\can.h \
   ..\Source\Public\can_message.h ..\Source\Public\rtwtypes.h \
   ..\Source\LIB\FIFO\inc\LibFifoQueue.h \
   ..\Source\BSW\CAN\CAN_NM\inc\CanNmMsgs.h \

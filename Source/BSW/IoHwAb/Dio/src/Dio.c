@@ -32,7 +32,7 @@ static GPIO_TypeDef* Dio_PORTTypeConvert(GPIO_Type GPIO_Base)
     }
 }
 
-static GPIO_PORTState Dio_PORTStateConvert(GPIO_PinState GPIO_State)
+static GPIO_PORTState Dio_PORTStateConvertIn(GPIO_PinState GPIO_State)
 {
     switch(GPIO_State)
     {
@@ -45,17 +45,30 @@ static GPIO_PORTState Dio_PORTStateConvert(GPIO_PinState GPIO_State)
     }
 }
 
+static GPIO_PinState Dio_PORTStateConvertOut(GPIO_PORTState GPIO_State)
+{
+    switch(GPIO_State)
+    {
+        case PORT_RESET:
+            return GPIO_PIN_RESET;
+        case PORT_SET:
+            return GPIO_PIN_SET;
+        default:
+            return GPIO_PIN_RESET;
+    }
+}
+
 GPIO_PORTState Dio_ReadChannel(GPIO_Pins GPIO_Cfg)
 {
     GPIO_TypeDef* PORT_ACT = Dio_PORTTypeConvert(GPIO_Cfg.GPIO_Base);
     GPIO_PinState PORT_State = HAL_GPIO_ReadPin(PORT_ACT, GPIO_Cfg.GPIO_Pin);
-    return Dio_PORTStateConvert(PORT_State);
+    return Dio_PORTStateConvertIn(PORT_State);
 }
 
 void Dio_WriteChannel(GPIO_Pins GPIO_Cfg, GPIO_PORTState GPIO_State)
 {
     GPIO_TypeDef* PORT_ACT = Dio_PORTTypeConvert(GPIO_Cfg.GPIO_Base);
-    HAL_GPIO_WritePin(PORT_ACT, GPIO_Cfg.GPIO_Pin, Dio_PORTStateConvert(GPIO_State));
+    HAL_GPIO_WritePin(PORT_ACT, GPIO_Cfg.GPIO_Pin, Dio_PORTStateConvertOut(GPIO_State));
 }
 
 

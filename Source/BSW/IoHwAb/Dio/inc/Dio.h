@@ -2,7 +2,7 @@
 #define DIO_H_INCLUDED
 
 #include <stdbool.h>
-#include "stm32f7xx_hal_gpio.h"
+/* #include "stm32f7xx_hal_gpio.h" */
 #include "gpio.h"
 #include "CanNm.h"
 

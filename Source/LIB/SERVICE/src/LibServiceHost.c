@@ -161,6 +161,8 @@ bool_t LibServiceHost_IsTerminated(const S_LibServiceHost_Inst_t* const pService
 void LibServiceHost_Notify(const S_LibServiceHost_Inst_t* const pServiceHost)
 {
 	Lib_Assert(NULL != pServiceHost);
-	Lib_Assert(NULL != pServiceHost->Callback);
-	pServiceHost->Callback(pServiceHost->pData);
+	if(NULL != pServiceHost->Callback)
+	{
+		pServiceHost->Callback(pServiceHost->pData);
+	}
 }

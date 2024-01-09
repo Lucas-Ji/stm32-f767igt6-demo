@@ -22,17 +22,11 @@
 
 /* USER CODE BEGIN 0 */
 
-/* 接收缓冲, �?大USART_REC_LEN个字�?. */
-uint8_t g_usart_rx_buf[USART_REC_LEN];
+/* uint8_t g_usart_rx_buf[USART_REC_LEN];
 
-/*  接收状�??
- *  bit15�?      接收完成标志
- *  bit14�?      接收�?0x0d
- *  bit13~0�?    接收到的有效字节数目
-*/
 uint16_t g_usart_rx_sta = 0;
 
-uint8_t g_rx_buffer[RXBUFFERSIZE];    /* HAL库使用的串口接收缓冲 */
+uint8_t g_rx_buffer[RXBUFFERSIZE]; */
 
 /* USER CODE END 0 */
 
@@ -65,7 +59,7 @@ void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-  HAL_UART_Receive_IT(&huart1, (uint8_t *)g_rx_buffer, RXBUFFERSIZE);
+/*   HAL_UART_Receive_IT(&huart1, (uint8_t *)g_rx_buffer, RXBUFFERSIZE); */
   /* USER CODE END USART1_Init 2 */
 
 }

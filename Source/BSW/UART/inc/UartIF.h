@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include "usart.h"
 
-
+extern int VirtualPrintf (const char *__format, ...);
 
 #endif
